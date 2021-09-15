@@ -1,14 +1,57 @@
+import { useState } from 'react';
+import './Login.scss';
+
+function initialState() {
+  return { email: '', password: '' };
+}
+
 export const Login = () => {
-  <div id="Login" className="Login-container">
+  const [ values, setValues ] = useState(initialState);
+
+  function onChange(event) {
+    const { value, name } = event.target;
+
+    setValues({ 
+      ...values,
+      [name]: value,
+     })
+  }
+
+  return (
+  <section id="Login" className="Login">
     <img
       className="Logo"
-      src="/public/img/Logo.png"
+      width="250px"
+      height="250px"
+      src="/Logo.png"
       alt="Astro Burger Logo"/>
     
-    <div id="Login-form" className="Login-form">
-      <input type="email"></input>
-      <input type="password"></input>
-    </div>
-    
-  </div>
+    <form>
+      <div className="Login_form-control">
+        <input
+          id="email"
+          type="email"
+          name="email"
+          onChange={onChange}
+          value={values.email}
+          placeholder="E-mail" />
+      </div>
+      <div className="Login_form-control">
+        <input 
+          id="password"
+          type="password"
+          name="password"
+          onChange={onChange}
+          value={values.password}
+          placeholder="Senha" />
+      </div>
+      <p className="Login-error">&nbsp;</p>
+      <button
+        type="submit"
+        className="btn btn-primary">
+        Acessar
+      </button>
+    </form>
+  </section>
+  )
 }
