@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Login.scss';
+import Button from '../../components/UI/Button'
 
 function initialState() {
   return { email: '', password: '' };
@@ -24,7 +25,7 @@ export const Login = () => {
       width="250px"
       height="250px"
       src="/Logo.png"
-      alt="Astro Burger Logo"/>
+      alt="Astro Burger Logo" />
     
     <form>
       <div className="Login_form-control">
@@ -46,11 +47,18 @@ export const Login = () => {
           placeholder="Senha" />
       </div>
       <p className="Login-error">&nbsp;</p>
-      <button
+      {/* MEU BOTÃO AQUI */}
+
+      <Button
+        variant="primary">
+      ACESSAR
+      </Button>
+      
+      {/* <button
         type="submit"
         className="btn btn-primary">
         Acessar
-      </button>
+      </button> */}
     </form>
   </section>
   )
