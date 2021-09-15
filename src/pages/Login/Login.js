@@ -1,3 +1,4 @@
+import Input from '../../components/UI/Input/Input'
 import { useState } from 'react';
 import './Login.scss';
 
@@ -28,22 +29,10 @@ export const Login = () => {
     
     <form>
       <div className="Login_form-control">
-        <input
-          id="email"
-          type="email"
-          name="email"
-          onChange={onChange}
-          value={values.email}
-          placeholder="E-mail" />
+        <Input variant="login" placeholder="E-mail" type="email" onChange={onChange}></Input>
       </div>
       <div className="Login_form-control">
-        <input 
-          id="password"
-          type="password"
-          name="password"
-          onChange={onChange}
-          value={values.password}
-          placeholder="Senha" />
+        <Input variant="login" placeholder="Senha" type="password" onChange={onChange}></Input>
       </div>
       <p className="Login-error">&nbsp;</p>
       <button

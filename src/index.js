@@ -7,5 +7,5 @@ ReactDOM.render(
   <Router>
     <Routes />
   </Router>,
-document.getElementById('root')
-); 
+  document.getElementById('root')
+);
