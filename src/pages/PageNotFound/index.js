@@ -1,4 +1,4 @@
-export const Error = () => (
+export const ErrorPage = () => (
   <div>
     <header>
       <h1> Error </h1>
