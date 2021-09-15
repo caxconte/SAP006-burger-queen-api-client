@@ -79,7 +79,7 @@ form {
   margin-bottom: 10px;
 }
 
-.Login_form-control input {
+/* .Login_form-control input {
   width: 230px;
   height: 44px;
   border-radius: 10px;
@@ -90,7 +90,7 @@ form {
   border: 0 none;
   outline: 0;
   padding: 15px;
-}
+} */
 
 button {
   display: -webkit-box;
