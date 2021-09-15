@@ -1,4 +1,4 @@
-import Input from '../../components/UI/Input'
+import Input from '../../components/UI/Input/Input'
 import { useState } from 'react';
 import './Login.scss';
 
@@ -29,10 +29,10 @@ export const Login = () => {
     
     <form>
       <div className="Login_form-control">
-        <Input variant="login" placeholder="E-mail" type="email"></Input>
+        <Input variant="login" placeholder="E-mail" type="email" onChange={onChange}></Input>
       </div>
       <div className="Login_form-control">
-        <Input variant="login" placeholder="Senha" type="password"></Input>
+        <Input variant="login" placeholder="Senha" type="password" onChange={onChange}></Input>
       </div>
       <p className="Login-error">&nbsp;</p>
       <button
