@@ -1,14 +1,19 @@
 import './Input.css';
 
-const Input = ({ variant, placeholder, type, name }) => {
+const Input = ({ variant, placeholder, type, name, label, onClick, onChange }) => {
   const classes = `input ${variant}`
   return (
-    <input
-      className={classes}
-      placeholder={placeholder}
-      type={type}
-      name={name}>
-    </ input>
+    <label>
+      <input
+        className={classes}
+        placeholder={placeholder}
+        type={type}
+        name={name}
+        onClick={onClick}
+        onChange={onChange}>
+      </ input>
+      {label}
+    </label>
   )
 }
 
