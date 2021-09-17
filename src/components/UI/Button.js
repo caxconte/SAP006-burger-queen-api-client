@@ -1,11 +1,10 @@
 import './style.scss';
 
-const Button = (props) => {
-  const className = `button ${props.variant}`
-  console.log(className);
+const Button = ({ variant, children, onClick }) => {
+  const className = `button ${variant}`
   return (
-    <button className={className}>
-      {props.children}
+    <button className={className} onClick={onClick}>
+      {children}
     </button>
   )
 }
