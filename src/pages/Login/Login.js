@@ -1,23 +1,23 @@
-import Input from '../../components/UI/Input/Input'
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import Input from '../../components/UI/Input/Input.js'
+import Button from '../../components/UI/Button.js';
+
+import { loginWithEmailAndPassword } from '../../services/index';
+
 import './Login.scss';
-import { signInWithEmailAndPassword } from '../../services/index'
-
-const SignIn = (event, email, password) => {
-  event.preventDefault()
-  return (
-    signInWithEmailAndPassword(email, password)
-      .then(() => console.log('logou'))
-      .catch(() => console.log('deu ruim'))
-  )
-}
-
-function initialState() {
-  return { email: '', password: '' };
-}
 
 export const Login = () => {
-  const [values, setValues] = useState(initialState);
+  const [values, setValues] = useState({ 
+    email: '',
+    password: ''
+  });
+
+  const history = useHistory();
+  function navigateTo(path) {
+    history.push(path);
+  }
 
   function onChange(event) {
     const { value, name } = event.target;
@@ -25,6 +25,32 @@ export const Login = () => {
       ...values,
       [name]: value,
     })
+  }
+
+  function onSubmit(event) {
+    event.preventDefault()
+    return (
+      loginWithEmailAndPassword(values.email, values.password)
+        .then(response => {
+          response.json()
+            .then(user => {
+              const token = user.token;
+              console.log(token);
+              const role = user.role;
+    
+              localStorage.setItem('userToken', token);
+    
+              if (token !== null && role === 'salao'){
+                navigateTo('/salao');
+              } else if (token !== null && role === 'cozinha'){
+                navigateTo('/cozinha');
+              } else {
+                alert('Usuário não cadastrado')
+              }
+          })
+        })
+        .catch(() => console.log('deu ruim'))
+    )
   }
 
   return (
@@ -56,12 +82,13 @@ export const Login = () => {
             onChange={(e) => onChange(e)}></Input>
         </div>
         <p className="Login-error">&nbsp;</p>
-        <button
-          onClick={(e) => SignIn(e, values.email, values.password)}
+        <Button
+        variant="primary"
+          onClick={(e) => onSubmit(e, values.email, values.password)}
           type="submit"
           className="btn btn-primary">
           Acessar
-        </button>
+        </Button>
       </form>
     </section>
   )

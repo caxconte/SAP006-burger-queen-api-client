@@ -1,5 +1,5 @@
-export const signUpAdm = () => {
-  const url = 'lab-api-bq.herokuapp.com/users';
+export const signUp = (user) => {
+  const url = 'https://lab-api-bq.herokuapp.com/users';
   return (
     fetch(url, {
       method: 'POST',
@@ -7,38 +7,19 @@ export const signUpAdm = () => {
         'Content-type': 'application/json'
       },
       body: JSON.stringify({
-        name: "adm",
-        email: "astroburger@mail.com",
-        password: "sample",
-        role: "adm",
-        restaurant: "astroBurger"
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        role: user.role,
+        restaurant: 'AstroBurger'
       })
     })
   )
 }
 
-// export const signUp = () => {
-//   const url = 'lab-api-bq.herokuapp.com/users';
-//   return (
-//     fetch(url, {
-//       method: 'POST',
-//       headers: {
-//         'Content-type': 'application/json'
-//       },
-//       body: JSON.stringify({
-//         name: "adm",
-//         email: "astroburger@mail.com",
-//         password: "sample",
-//         role: "adm",
-//         restaurant: "astroBurger"
-//       })
-//     })
-//   )
-// }
-
-export const signInWithEmailAndPassword = (email, password) => {
-  const url = 'lab-api-bq.herokuapp.com/auth';
-  return (
+export const loginWithEmailAndPassword = async (email, password) => {
+  const url = 'https://lab-api-bq.herokuapp.com/auth';
+  const response = await (
     fetch(url, {
       method: 'POST',
       headers: {
@@ -50,4 +31,5 @@ export const signInWithEmailAndPassword = (email, password) => {
       })
     })
   )
+  return response;
 }
