@@ -8,9 +8,9 @@ import { SignUpPage } from './pages/SignUp/index';
 export const Routes = () => {
   return (
     <Switch>
-      <Route exact path='/' component={Home} />
+      <Route exact path='/' component={Login} />
+      <Route path='/home' component={Home} />
       <Route path='/sobre' component={Sobre} />
-      <Route path='/login' component={Login} />
       <Route path='/signup' component={SignUpPage} />
       <Route component={ErrorPage} />
     </Switch>

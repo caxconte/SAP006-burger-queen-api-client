@@ -1,4 +1,4 @@
-import './Input.css';
+import './Input.scss';
 
 const Input = ({ variant, placeholder, type, name, label, onChange, value }) => {
   const classes = `input ${variant}`

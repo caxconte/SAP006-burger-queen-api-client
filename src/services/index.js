@@ -1,4 +1,4 @@
-export async function signUp (email, password, role) {
+export const signUp = async (email, password, role) => {
   const url = 'https://lab-api-bq.herokuapp.com/users';
   const resp = await fetch(url, {
     method: 'POST',
@@ -16,9 +16,9 @@ export async function signUp (email, password, role) {
   return response;
 }
 
-export const signInWithEmailAndPassword = (email, password) => {
+export const loginWithEmailAndPassword = async (email, password) => {
   const url = 'https://lab-api-bq.herokuapp.com/auth';
-  return (
+  const response = await (
     fetch(url, {
       method: 'POST',
       headers: {
@@ -30,4 +30,5 @@ export const signInWithEmailAndPassword = (email, password) => {
       })
     })
   )
+  return response;
 }
