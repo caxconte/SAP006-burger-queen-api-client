@@ -1,6 +1,6 @@
 import './Input.css';
 
-const Input = ({ variant, placeholder, type, name, label, onClick, onChange }) => {
+const Input = ({ variant, placeholder, type, name, label, onChange, value }) => {
   const classes = `input ${variant}`
   return (
     <label>
@@ -9,8 +9,8 @@ const Input = ({ variant, placeholder, type, name, label, onClick, onChange }) =
         placeholder={placeholder}
         type={type}
         name={name}
-        onClick={onClick}
-        onChange={onChange}>
+        onChange={onChange}
+        value={value}>
       </ input>
       {label}
     </label>
