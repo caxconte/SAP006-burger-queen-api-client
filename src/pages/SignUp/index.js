@@ -1,5 +1,6 @@
-import './SignUp.css'
+import './SignUp.scss'
 import Input from '../../components/UI/Input/Input'
+import Button from '../../components/UI/Button.js';
 import { useState } from 'react';
 import { signUp } from '../../services/index'
 import { useHistory } from 'react-router-dom';
@@ -77,7 +78,8 @@ export const SignUpPage = () => {
             placeholder="E-mail"
             type="email"
             name="email"
-            onChange={onChange}></Input>
+            onChange={onChange}>
+          </Input>
         </div>
         <div className="Login_form-control">
           <Input
@@ -85,7 +87,8 @@ export const SignUpPage = () => {
             placeholder="Senha"
             type="password"
             name="password"
-            onChange={onChange}></Input>
+            onChange={onChange}>
+          </Input>
         </div>
         <div className="Login_form-control">
           <Input
@@ -93,7 +96,8 @@ export const SignUpPage = () => {
             placeholder="Repita a Senha"
             type="password"
             name="repeatPassword"
-            onChange={onChange} />
+            onChange={onChange}>
+          </Input>
         </div>
         <div className="Signup_radio-container">
           <Input
@@ -102,22 +106,23 @@ export const SignUpPage = () => {
             value="salao"
             name="role"
             label="salão"
-            onChange={onChange} />
+            onChange={onChange}>
+          </Input>
           <Input
             variant=""
             type="radio"
             value="cozinha"
             name="role"
             label="cozinha"
-            onChange={onChange} />
+            onChange={onChange}>
+          </Input>
         </div>
         <p className="SignUp-error">{errorNotice} &nbsp;</p>
-        <button
-          onClick={(e) => SignUp(e)}
-          type="submit"
-          className="btn btn-primary">
-          Cadastrar
-        </button>
+        <Button
+          onClick={SignUp}
+          className="btn btn-primary"
+          children="cadastrar">
+        </Button>
       </form>
       <div id="modal"></div>
     </section>

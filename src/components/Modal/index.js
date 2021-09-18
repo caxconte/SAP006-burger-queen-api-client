@@ -1,5 +1,6 @@
 import reactDom from 'react-dom';
-import './Modal.css'
+import Button from '../UI/Button';
+import './Modal.scss'
 
 const Modal = ({ header, children, icon }) => {
   let iconClass = '';
@@ -17,7 +18,10 @@ const Modal = ({ header, children, icon }) => {
           <p className="msg">{header}</p>
           <p>{children}</p>
         </div>
-        <button className="close-button" onClick={CloseModal}>ok</button>
+        <Button
+          onClick={CloseModal}
+          children="ok" >
+        </Button>
       </div>
       <div className="overlay"></div>
     </div>
