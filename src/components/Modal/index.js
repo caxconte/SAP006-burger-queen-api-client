@@ -1,5 +1,5 @@
 import reactDom from 'react-dom';
-import Button from '../UI/Button';
+import Button from '../UI/Button/Button';
 import './Modal.scss'
 
 const Modal = ({ header, children, icon }) => {
