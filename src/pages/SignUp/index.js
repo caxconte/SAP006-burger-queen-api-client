@@ -1,6 +1,6 @@
 import './SignUp.scss'
 import Input from '../../components/UI/Input/Input'
-import Button from '../../components/UI/Button.js';
+import Button from '../../components/UI/Button/Button.js';
 import { useState } from 'react';
 import { signUp } from '../../services/index'
 import { useHistory } from 'react-router-dom';
@@ -72,7 +72,7 @@ export const SignUpPage = () => {
         alt="Astro Burger Logo" />
 
       <form id="signup_form">
-        <div className="Login_form-control">
+        <div className="form-control">
           <Input
             variant="login"
             placeholder="E-mail"
@@ -81,7 +81,7 @@ export const SignUpPage = () => {
             onChange={onChange}>
           </Input>
         </div>
-        <div className="Login_form-control">
+        <div className="form-control">
           <Input
             variant="login"
             placeholder="Senha"
@@ -90,7 +90,7 @@ export const SignUpPage = () => {
             onChange={onChange}>
           </Input>
         </div>
-        <div className="Login_form-control">
+        <div className="form-control">
           <Input
             variant="login"
             placeholder="Repita a Senha"
@@ -117,11 +117,12 @@ export const SignUpPage = () => {
             onChange={onChange}>
           </Input>
         </div>
-        <p className="SignUp-error">{errorNotice} &nbsp;</p>
+        <p className="paragraph-error">{errorNotice} &nbsp;</p>
         <Button
           onClick={SignUp}
           className="btn btn-primary"
-          children="cadastrar">
+          children="cadastrar"
+          variant="primary">
         </Button>
       </form>
       <div id="modal"></div>
