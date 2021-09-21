@@ -31,13 +31,13 @@ export const SignUpPage = () => {
       signUp(values.email, values.password, values.role)
         .then((response) => {
           if (response.token) {
-            reactDom.render(<Modal header='Cadastro realizado com sucesso!' icon='success' />, document.getElementById('modal'));
+            reactDom.render(<Modal header='Cadastro realizado com sucesso!' icon='success' testid='modalSuccess' />, document.getElementById('modal'));
             ResetForm();
           } else {
             // Respuesta de red OK pero respuesta HTTP no OK;
             const code = response.code;
             const message = response.message
-            reactDom.render(<Modal header={'Erro: ' + code} children={message} icon='error' />, document.getElementById('modal'));
+            reactDom.render(<Modal header={'Erro: ' + code} children={message} icon='error' testid='modalError'/>, document.getElementById('modal'));
             ResetForm();
           }
         })
@@ -101,7 +101,7 @@ export const SignUpPage = () => {
         </div>
         <div className="Signup_radio-container">
           <Input
-            variant=""
+            testid="input-salao"
             type="radio"
             value="salao"
             name="role"
@@ -109,7 +109,7 @@ export const SignUpPage = () => {
             onChange={onChange}>
           </Input>
           <Input
-            variant=""
+            testid="input-cozinha"
             type="radio"
             value="cozinha"
             name="role"
@@ -119,8 +119,9 @@ export const SignUpPage = () => {
         </div>
         <p className="SignUp-error">{errorNotice} &nbsp;</p>
         <Button
+          testid="signup-btn"
           onClick={SignUp}
-          className="btn btn-primary"
+          variant="primary"
           children="cadastrar">
         </Button>
       </form>

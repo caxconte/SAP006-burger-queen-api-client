@@ -2,7 +2,7 @@ import reactDom from 'react-dom';
 import Button from '../UI/Button';
 import './Modal.scss'
 
-const Modal = ({ header, children, icon }) => {
+const Modal = ({ header, children, icon, testid }) => {
   let iconClass = '';
   icon === 'error' ? iconClass = 'far fa-times-circle' : iconClass = 'far fa-check-circle';
 
@@ -11,7 +11,7 @@ const Modal = ({ header, children, icon }) => {
   }
 
   return (
-    <div>
+    <div data-testid={testid}>
       <div className="modal">
         <i className={iconClass}></i>
         <div>
@@ -19,6 +19,7 @@ const Modal = ({ header, children, icon }) => {
           <p>{children}</p>
         </div>
         <Button
+          variant="primary"
           onClick={CloseModal}
           children="ok" >
         </Button>
