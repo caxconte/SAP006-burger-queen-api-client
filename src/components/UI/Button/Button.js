@@ -1,4 +1,4 @@
-import './style.scss';
+import './button.scss';
 
 const Button = ({ variant, children, onClick, testid }) => {
   const className = `button ${variant}`

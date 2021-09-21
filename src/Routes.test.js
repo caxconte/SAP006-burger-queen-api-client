@@ -9,7 +9,7 @@
 
 import { Routes } from "./Routes";
 import { Home } from './pages/Home/Home.js';
-import { Login } from './pages/Login/Login.js';
+import { LoginPage } from './pages/Login/Login.js';
 import { Sobre } from './pages/Sobre/Sobre.js';
 import { SignUpPage } from './pages/SignUp/index.js';
 import { ErrorPage } from './pages/PageNotFound/index.js';
@@ -25,7 +25,7 @@ jest.mock('./pages/SignUp/index.js');
 describe("Tests for Router", () => {
   test("Should render page Login on default route", () => {
     // Arrange
-    Login.mockImplementation(() => <div>HomePageMock</div>);
+    LoginPage.mockImplementation(() => <div>HomePageMock</div>);
     // Home.mockReturnValue("HomePageMock");
 
     // Act
@@ -38,7 +38,7 @@ describe("Tests for Router", () => {
     // Assert
     expect(screen.getByText("HomePageMock")).toBeInTheDocument();
     // expect(document.body.textContent).toBe('HomePageMock');
-    expect(Login).toHaveBeenCalledTimes(1);
+    expect(LoginPage).toHaveBeenCalledTimes(1);
   });
 
   test("Should render page Sobre for sobre route", () => {
