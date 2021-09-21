@@ -1,83 +1,78 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Routes } from '../../Routes'
-import findRenderedComponentWithType from 'react-dom/test-utils';
-import { unmountComponentAtNode } from 'react-dom';
-import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
-
 import { SignUpPage } from './index.js';
 import * as services from '../../services/index.js';
-// import { signUp } from '../../services/index.js';
 
 jest.mock('../../services/index.js');
 
 describe("SignUpPage", () => {
-  let root;
-
   beforeEach(() => {
     jest.clearAllMocks();
-    root = document.createElement('div');
-    document.body.appendChild(root);
   });
 
-  afterEach(() => {
-    document.body.removeChild(root);
-    root = null;
-  });
-
-  it("should render success modal", async () => {
+  it.only("should render success modal", async () => {
     const response = { token: "testtoken" }
-    services.signUp = jest.fn(() => { return Promise.resolve(response) })
+    services.signUp.mockResolvedValueOnce(response);
 
     // Render page
-    const { queryByPlaceholderText, queryByTestId } = render(<SignUpPage />, root)
+    render(<SignUpPage />)
 
     // Find the elements
-    const emailInput = queryByPlaceholderText('E-mail');
-    const passwordInput = queryByPlaceholderText('Senha');
-    const repeatPasswordInput = queryByPlaceholderText('Repita a Senha');
-    const roleCozinhaInput = queryByTestId('input-cozinha');
-    const buttonSubmit = queryByTestId('signup-btn');
+    const emailInput = screen.queryByPlaceholderText('E-mail');
+    const passwordInput = screen.queryByPlaceholderText('Senha');
+    const repeatPasswordInput = screen.queryByPlaceholderText('Repita a Senha');
+    const roleCozinhaInput = screen.queryByTestId('input-cozinha');
+    const buttonSubmit = screen.queryByTestId('signup-btn');
     const modalContainer = screen.queryByTestId('modalSuccess');
     expect(modalContainer).not.toBeInTheDocument();
 
     // act
-    fireEvent.change(emailInput, { target: { value: "test@test.com" } });
-    fireEvent.change(passwordInput, { target: { value: "testtest" } });
-    fireEvent.change(repeatPasswordInput, { target: { value: "testtest" } });
-    fireEvent.click(roleCozinhaInput);
-    fireEvent.click(buttonSubmit);
+    const email = 'test@test.com';
+    const password = "testtest";
 
-    expect(emailInput.value).toBe('test@test.com');
+    userEvent.type(emailInput, email);
+    userEvent.type(passwordInput, password);
+    userEvent.type(repeatPasswordInput, password);
+    userEvent.click(roleCozinhaInput);
+    userEvent.click(buttonSubmit);
+
+    expect(emailInput.value).toBe(email);
     expect(services.signUp).toHaveBeenCalledTimes(1);
-    expect(services.signUp).toHaveBeenCalledWith('test@test.com', 'testtest', 'cozinha');
+    expect(services.signUp).toHaveBeenCalledWith(email, password, 'cozinha');
     await waitFor(() => {
-      const elem = queryByTestId('modalSuccess');
+      const elem = screen.queryByTestId('modalSuccess');
       expect(elem).toBeInTheDocument();
     });
   })
 
   it("should render error modal", async () => {
     const response = { code: "test", message: "test" }
-    services.signUp = jest.fn(() => { return Promise.resolve(response) })
+    services.signUp.mockResolvedValueOnce(response);
 
-    const { queryByPlaceholderText, queryByTestId } = render(<SignUpPage />, root)
+    render(<SignUpPage />)
 
-    const emailInput = queryByPlaceholderText('E-mail');
-    const passwordInput = queryByPlaceholderText('Senha');
-    const repeatPasswordInput = queryByPlaceholderText('Repita a Senha');
-    const roleCozinhaInput = queryByTestId('input-cozinha');
-    const buttonSubmit = queryByTestId('signup-btn');
+    const emailInput = screen.queryByPlaceholderText('E-mail');
+    const passwordInput = screen.queryByPlaceholderText('Senha');
+    const repeatPasswordInput = screen.queryByPlaceholderText('Repita a Senha');
+    const roleCozinhaInput = screen.queryByTestId('input-cozinha');
+    const buttonSubmit = screen.queryByTestId('signup-btn');
+    const modalContainer = screen.queryByTestId('modalSuccess');
+    expect(modalContainer).not.toBeInTheDocument();
 
-    fireEvent.change(emailInput, { target: { value: "test@test.com" } });
-    fireEvent.change(passwordInput, { target: { value: "testtest" } });
-    fireEvent.change(repeatPasswordInput, { target: { value: "testtest" } });
-    fireEvent.click(roleCozinhaInput);
-    fireEvent.click(buttonSubmit);
+    const email = 'test@test.com';
+    const password = "testtest";
+
+    userEvent.type(emailInput, email);
+    userEvent.type(passwordInput, password);
+    userEvent.type(repeatPasswordInput, password);
+    userEvent.click(roleCozinhaInput);
+    userEvent.click(buttonSubmit);
 
     expect(services.signUp).toHaveBeenCalledTimes(1);
     await waitFor(() => {
-      const elem = queryByTestId('modalError');
+      const elem = screen.queryByTestId('modalError');
       expect(elem).toBeInTheDocument();
     });
   })
@@ -86,24 +81,28 @@ describe("SignUpPage", () => {
     const response = { code: "error", message: "error" };
     services.signUp = jest.fn(() => { return Promise.reject(Error(response)) });
 
-    const { queryByPlaceholderText, queryByTestId } = render(
+    render(
       <MemoryRouter initialEntries={['/signup']}>
         <Routes />
-      </MemoryRouter>,
-      root
+      </MemoryRouter>
     );
 
-    const emailInput = queryByPlaceholderText('E-mail');
-    const passwordInput = queryByPlaceholderText('Senha');
-    const repeatPasswordInput = queryByPlaceholderText('Repita a Senha');
-    const roleCozinhaInput = queryByTestId('input-cozinha');
-    const buttonSubmit = queryByTestId('signup-btn');
+    const emailInput = screen.queryByPlaceholderText('E-mail');
+    const passwordInput = screen.queryByPlaceholderText('Senha');
+    const repeatPasswordInput = screen.queryByPlaceholderText('Repita a Senha');
+    const roleCozinhaInput = screen.queryByTestId('input-cozinha');
+    const buttonSubmit = screen.queryByTestId('signup-btn');
+    const modalContainer = screen.queryByTestId('modalSuccess');
+    expect(modalContainer).not.toBeInTheDocument();
 
-    fireEvent.change(emailInput, { target: { value: "test@test.com" } });
-    fireEvent.change(passwordInput, { target: { value: "testtest" } });
-    fireEvent.change(repeatPasswordInput, { target: { value: "testtest" } });
-    fireEvent.click(roleCozinhaInput);
-    fireEvent.click(buttonSubmit);
+    const email = 'test@test.com';
+    const password = "testtest";
+
+    userEvent.type(emailInput, email);
+    userEvent.type(passwordInput, password);
+    userEvent.type(repeatPasswordInput, password);
+    userEvent.click(roleCozinhaInput);
+    userEvent.click(buttonSubmit);
 
     expect(services.signUp).toHaveBeenCalledTimes(1);
     await waitFor(() => {

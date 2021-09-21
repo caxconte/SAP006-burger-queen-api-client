@@ -7,10 +7,23 @@ import { useHistory } from 'react-router-dom';
 import Modal from '../../components/Modal/index';
 import reactDom from 'react-dom';
 
+const validate = (values) => {
+  const mailFormat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (!values.email || mailFormat.test(values.email) === false) {
+    return('Escreva um email válido')
+  } else if (!values.password || values.password.length < 6) {
+    return('A senha deve ter no mínimo 6 dígitos')
+  } else if (values.password !== values.repeatPassword) {
+    return('As senhas não conferem')
+  } else if (!values.role) {
+    return('Escolha o setor')
+  }
+  return ''
+}
+
 export const SignUpPage = () => {
   const history = useHistory();
   const [errorNotice, setError] = useState('');
-  const mailFormat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const ResetForm = () => {
     document.getElementById('signup_form').reset();
@@ -19,15 +32,9 @@ export const SignUpPage = () => {
 
   const SignUp = (event) => {
     event.preventDefault()
-    if (!values.email || mailFormat.test(values.email) === false) {
-      setError('Escreva um email válido')
-    } else if (!values.password || values.password.length < 6) {
-      setError('A senha deve ter no mínimo 6 dígitos')
-    } else if (values.password !== values.repeatPassword) {
-      setError('As senhas não conferem')
-    } else if (!values.role) {
-      setError('Escolha o setor')
-    } else {
+    const invalid = validate(values)
+    setError(invalid)
+    if(!invalid) {
       signUp(values.email, values.password, values.role)
         .then((response) => {
           if (response.token) {
@@ -37,7 +44,7 @@ export const SignUpPage = () => {
             // Respuesta de red OK pero respuesta HTTP no OK;
             const code = response.code;
             const message = response.message
-            reactDom.render(<Modal header={'Erro: ' + code} children={message} icon='error' testid='modalError'/>, document.getElementById('modal'));
+            reactDom.render(<Modal header={'Erro: ' + code} children={message} icon='error' testid='modalError' />, document.getElementById('modal'));
             ResetForm();
           }
         })
@@ -46,7 +53,7 @@ export const SignUpPage = () => {
           history.push('/ErrorPage')
           throw Error(error.message);
         })
-    }
+      }
   }
 
   function initialState() {
