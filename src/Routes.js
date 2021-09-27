@@ -1,16 +1,16 @@
 import { Switch, Route } from 'react-router-dom';
-import { Home } from './pages/Home/Home.js';
-import { Sobre } from './pages/Sobre/Sobre.js';
-import { ErrorPage } from './pages/PageNotFound/index.js';
-import { LoginPage } from './pages/Login/Login.js';
-import { SignUpPage } from './pages/SignUp/index';
+import { Home } from './pages/home/home';
+import { Menu } from './pages/menu/menu';
+import { ErrorPage } from './pages/404/index';
+import { LoginPage } from './pages/login/login';
+import { SignUpPage } from './pages/signup/signup';
 
 export const Routes = () => {
   return (
     <Switch>
       <Route exact path='/' component={LoginPage} />
       <Route path='/home' component={Home} />
-      <Route path='/sobre' component={Sobre} />
+      <Route path='/menu' component={Menu} />
       <Route path='/signup' component={SignUpPage} />
       <Route component={ErrorPage} />
     </Switch>

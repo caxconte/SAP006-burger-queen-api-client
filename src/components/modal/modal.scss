@@ -1,5 +1,5 @@
 .modal {
-  position:absolute;
+  position: absolute;
   display: flex;
   width: 236px;
   height: 270px;
@@ -37,12 +37,15 @@
 
   p {
     text-align: center;
-    font-size: 1.2rem;
   }
   
   .msg {
     font-size: 1.5rem;
     margin-bottom: 0;
+  }
 
+  .modal-paragraph {
+    font-size: 0.8rem;
+    margin-top: 10px;
   }
 }
