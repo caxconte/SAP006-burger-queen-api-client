@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export const Home = () => (
   <div>
@@ -6,7 +6,7 @@ export const Home = () => (
       <h1> HOME </h1>
     </header>
     <p>
-      <Link to="/sobre"> Ir para página Sobre</Link>
+      <Link to="/about"> Ir para página Sobre</Link>
     </p>
   </div>
 );

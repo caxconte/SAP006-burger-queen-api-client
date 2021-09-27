@@ -1,0 +1,27 @@
+@import "../../../global.css";
+
+.menu-buttons {
+  margin-top: 40px;
+  margin-left: auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.menu-buttons-category {
+  display: flex;
+  width: 150px;
+  height: 35px;
+  border-radius: 10px;
+
+  background-color: var(--color-background-hover);
+  color: var(--color-yellow);
+  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
+
+  text-transform: uppercase; 
+
+  &:hover {
+    background-color: var(--color-yellow);
+    color: var(--color-white);
+  }
+}

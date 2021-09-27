@@ -1,7 +1,15 @@
-import './Input.scss';
+import "./input.scss";
 
-const Input = ({ variant, placeholder, type, name, label, onChange, value }) => {
-  const classes = `input ${variant}`
+const Input = ({
+  variant,
+  placeholder,
+  type,
+  name,
+  label,
+  onChange,
+  value,
+}) => {
+  const classes = `input ${variant}`;
   return (
     <label>
       <input
@@ -10,11 +18,11 @@ const Input = ({ variant, placeholder, type, name, label, onChange, value }) => 
         type={type}
         name={name}
         onChange={onChange}
-        value={value}>
-      </ input>
+        value={value}
+      ></input>
       {label}
     </label>
-  )
-}
+  );
+};
 
 export default Input;
