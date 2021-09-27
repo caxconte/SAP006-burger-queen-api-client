@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import { Routes } from "../../Routes";
 import { MemoryRouter } from "react-router-dom";
-import { SignUpPage } from "./index.js";
+import { SignUpPage } from "./signup";
 import * as services from "../../services/index.js";
 
 jest.mock("../../services/index.js");

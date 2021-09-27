@@ -4,6 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 import Input from "../../components/UI/input/input";
 import Button from "../../components/UI/button/button";
 import Modal from "../../components/modal/modal";
+import Img from "../../components/UI/image/img";
 
 import { loginWithEmailAndPassword } from "../../services/index";
 
@@ -92,8 +93,8 @@ export const LoginPage = () => {
 
   return (
     <section id="Login" className="Login">
-      <img
-        className="Logo"
+      <Img
+        className="logo"
         width="250px"
         height="250px"
         src="/Logo.png"
