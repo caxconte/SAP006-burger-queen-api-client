@@ -89,15 +89,15 @@ describe("SignUpPage", () => {
       </MemoryRouter>
     );
 
-    const emailInput = screen.queryByPlaceholderText("E-mail");
-    const passwordInput = screen.queryByPlaceholderText("Senha");
-    const repeatPasswordInput = screen.queryByPlaceholderText("Repita a Senha");
-    const roleCozinhaInput = screen.queryByTestId("input-cozinha");
-    const buttonSubmit = screen.queryByTestId("signup-btn");
-    const modalContainer = screen.queryByTestId("modalSuccess");
+    const emailInput = screen.queryByPlaceholderText('E-mail');
+    const passwordInput = screen.queryByPlaceholderText('Senha');
+    const repeatPasswordInput = screen.queryByPlaceholderText('Repita a Senha');
+    const roleCozinhaInput = screen.queryByTestId('input-cozinha');
+    const buttonSubmit = screen.queryByTestId('signup-btn');
+    const modalContainer = screen.queryByTestId('modalSuccess');
     expect(modalContainer).not.toBeInTheDocument();
 
-    const email = "test@test.com";
+    const email = 'test@test.com';
     const password = "testtest";
 
     userEvent.type(emailInput, email);
@@ -108,10 +108,11 @@ describe("SignUpPage", () => {
 
     expect(services.signUp).toHaveBeenCalledTimes(1);
     await waitFor(() => {
-      const elem = screen.getByText("Error");
+      const elem = screen.getByText('Error');
       expect(elem).toBeInTheDocument();
-    })
+    });
   })
+    
 })
 
 describe("Input Email", () => {
