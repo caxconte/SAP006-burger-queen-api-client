@@ -50,3 +50,8 @@ form {
   flex-direction: column;
   margin-bottom: 10px;
 }
+
+fieldset {
+  border: none;
+  text-align: center;
+}
