@@ -1,12 +1,7 @@
-import { Link } from 'react-router-dom';
+import SideMenu from '../../components/Side Menu';
 
 export const Home = () => (
   <div>
-    <header>
-      <h1> HOME </h1>
-    </header>
-    <p>
-      <Link to="/sobre"> Ir para página Sobre</Link>
-    </p>
+    <SideMenu/>
   </div>
 );
