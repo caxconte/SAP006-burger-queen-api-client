@@ -14,19 +14,24 @@
   flex-wrap: wrap;
   z-index: 2;
   padding: 5px;
-
-  i {
+  
+  span {
     font-size: 65px;
     flex-basis: 100%;
     text-align: center;
     margin: auto;
   }
 
-  .fa-times-circle {
-    color: var(--color-red);
+  button span {
+    margin: 0;
+    flex-basis: 0;
   }
 
-  .fa-check-circle{
+  .times-circle {
+    color: var(--color-red);
+  }
+  
+  .check-circle{
     color: var(--color-green);
   }
 
@@ -34,22 +39,10 @@
     text-align: center;
     font-size: 1.2rem;
   }
-
+  
   .msg {
     font-size: 1.5rem;
     margin-bottom: 0;
-    flex-basis: 100%;
-  }
-}
 
-.overlay {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: 200ms ease-in-out;
-  pointer-events: all;
-  z-index: 1;
+  }
 }

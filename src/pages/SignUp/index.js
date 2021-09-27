@@ -1,64 +1,91 @@
-import './SignUp.scss'
-import Input from '../../components/UI/Input/Input'
-import Button from '../../components/UI/Button/Button.js';
+import './signUp.scss'
 import { useState } from 'react';
 import { signUp } from '../../services/index'
 import { useHistory } from 'react-router-dom';
-import Modal from '../../components/Modal/index';
-import reactDom from 'react-dom';
+
+import Input from '../../components/UI/Input/Input'
+import Button from '../../components/UI/Button/Button.js';
+import Img from '../../components/UI/image/img';
+import Modal from '../../components/modal/index';
 
 const validate = (values) => {
   const mailFormat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (!values.email || mailFormat.test(values.email) === false) {
-    return('Escreva um email válido')
+    return ('Escreva um email válido')
   } else if (!values.password || values.password.length < 6) {
-    return('A senha deve ter no mínimo 6 dígitos')
+    return ('A senha deve ter no mínimo 6 dígitos')
   } else if (values.password !== values.repeatPassword) {
-    return('As senhas não conferem')
+    return ('As senhas não conferem')
   } else if (!values.role) {
-    return('Escolha o setor')
+    return ('Escolha o setor')
   }
   return ''
+}
+
+function initialStateModal() {
+  return { header: '', icon: '', testid: '', children: '' };
+}
+
+function initialState() {
+  return { email: '', password: '', repeatPassword: '', role: '' };
 }
 
 export const SignUpPage = () => {
   const history = useHistory();
   const [errorNotice, setError] = useState('');
 
-  const ResetForm = () => {
-    document.getElementById('signup_form').reset();
-    setError('');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const timeOut = (path) => {
+    const timer = setTimeout(() => {
+      history.push(`/${path}`);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }
+
+  const [modal, setModalValues] = useState(initialStateModal);
+  const ModalProps = (code, message) => {
+    if (code !== undefined) {
+      setModalValues({
+        header: 'Erro: ' + code,
+        children: message,
+        icon: 'error',
+        testid: 'modalError'
+      })
+    } else {
+      setModalValues({
+        header: 'Cadastro realizado com sucesso!',
+        icon: 'success',
+        testid: 'modalSuccess',
+        children: ''
+      })
+    }
+    setIsOpen(true);
   }
 
   const SignUp = (event) => {
-    event.preventDefault()
-    const invalid = validate(values)
-    setError(invalid)
-    if(!invalid) {
+    event.preventDefault();
+    const invalid = validate(values);
+    setError(invalid);
+
+    if (!invalid) {
       signUp(values.email, values.password, values.role)
         .then((response) => {
           if (response.token) {
-            reactDom.render(<Modal header='Cadastro realizado com sucesso!' icon='success' testid='modalSuccess' />, document.getElementById('modal'));
-            ResetForm();
+            ModalProps();
+            timeOut(response.role);
           } else {
-            // Respuesta de red OK pero respuesta HTTP no OK;
             const code = response.code;
-            const message = response.message
-            reactDom.render(<Modal header={'Erro: ' + code} children={message} icon='error' testid='modalError' />, document.getElementById('modal'));
-            ResetForm();
+            const message = response.message;
+            ModalProps(code, message);
           }
         })
         .catch((error) => {
-          // Hubo un problema con la petición Fetch;
-          history.push('/ErrorPage')
-          throw Error(error.message);
+          history.push('/ErrorPage');
         })
-      }
+    }
   }
 
-  function initialState() {
-    return { email: '', password: '', repeatPassword: '', role: '' };
-  }
   const [values, setValues] = useState(initialState);
 
   const onChange = (event) => {
@@ -71,7 +98,7 @@ export const SignUpPage = () => {
 
   return (
     <section id="signUp" className="Login signUp">
-      <img
+      <Img
         className="Logo"
         width="250px"
         height="250px"
@@ -79,60 +106,71 @@ export const SignUpPage = () => {
         alt="Astro Burger Logo" />
 
       <form id="signup_form">
-        <div className="form-control">
-          <Input
-            variant="login"
-            placeholder="E-mail"
-            type="email"
-            name="email"
-            onChange={onChange}>
-          </Input>
-        </div>
-        <div className="form-control">
-          <Input
-            variant="login"
-            placeholder="Senha"
-            type="password"
-            name="password"
-            onChange={onChange}>
-          </Input>
-        </div>
-        <div className="form-control">
-          <Input
-            variant="login"
-            placeholder="Repita a Senha"
-            type="password"
-            name="repeatPassword"
-            onChange={onChange}>
-          </Input>
-        </div>
-        <div className="Signup_radio-container">
-          <Input
-            testid="input-salao"
-            type="radio"
-            value="salao"
-            name="role"
-            label="salão"
-            onChange={onChange}>
-          </Input>
-          <Input
-            testid="input-cozinha"
-            type="radio"
-            value="cozinha"
-            name="role"
-            label="cozinha"
-            onChange={onChange}>
-          </Input>
-        </div>
-        <p className="paragraph-error">{errorNotice} &nbsp;</p>
+        <fieldset>
+          <div className="form-control">
+            <Input
+              variant="login"
+              placeholder="E-mail"
+              type="email"
+              name="email"
+              onChange={onChange}>
+            </Input>
+          </div>
+          <div className="form-control">
+            <Input
+              variant="login"
+              placeholder="Senha"
+              type="password"
+              name="password"
+              onChange={onChange}>
+            </Input>
+          </div>
+          <div className="form-control">
+            <Input
+              variant="login"
+              placeholder="Repita a Senha"
+              type="password"
+              name="repeatPassword"
+              onChange={onChange}>
+            </Input>
+          </div>
+          <div className="Signup_radio-container">
+            <Input
+              testid="input-salao"
+              type="radio"
+              value="salao"
+              name="role"
+              label="salão"
+              onChange={onChange}>
+            </Input>
+            <Input
+              testid="input-cozinha"
+              type="radio"
+              value="cozinha"
+              name="role"
+              label="cozinha"
+              onChange={onChange}>
+            </Input>
+          </div>
+          <p className="paragraph-error">{errorNotice} &nbsp;</p>
+        </fieldset>
         <Button
           onClick={SignUp}
-          children="cadastrar"
           variant="primary"
           testid="signup-btn">
+          cadastrar
         </Button>
       </form>
-      <div id="modal"></div>
+      <div id="modal">
+        <Modal
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          testid={modal.testid}
+          header={modal.header}
+          icon={modal.icon}
+          children={modal.children}>
+        </Modal>
+      </div>
     </section>
   )
 }
