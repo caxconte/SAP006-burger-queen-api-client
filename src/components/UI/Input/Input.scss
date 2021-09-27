@@ -4,6 +4,7 @@
   border: 0 none;
   outline: 0;
   padding: 15px;
+  letter-spacing: 1px;
 }
 
 .login {
@@ -11,4 +12,8 @@
   height: 44px;
   color: var(--color-white);
   background-color: var(--color-background-hover);
+}
+
+label {
+  letter-spacing: 2px;
 }

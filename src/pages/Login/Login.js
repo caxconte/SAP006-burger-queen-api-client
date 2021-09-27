@@ -4,7 +4,7 @@ import reactDom from 'react-dom';
 
 import Input from '../../components/UI/Input/Input.js'
 import Button from '../../components/UI/Button/Button.js';
-import Modal from '../../components/Modal/index';
+import Modal from '../../components/modal/index';
 
 import { loginWithEmailAndPassword } from '../../services/index';
 
