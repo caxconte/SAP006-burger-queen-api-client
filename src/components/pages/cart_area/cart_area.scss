@@ -1,0 +1,16 @@
+.cart-area {
+  display: grid;
+  grid-template-rows:
+  "client"
+  "orders"
+  "finish";
+
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 10px;
+  max-width: 300px;
+
+  background-color: var(--color-yellow);
+
+  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
+}

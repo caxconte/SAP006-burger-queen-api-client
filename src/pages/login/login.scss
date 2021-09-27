@@ -1,0 +1,17 @@
+.Login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cadastre {
+  color: var(--color-white);
+  font-weight: 900;
+  font-size: 0.8rem;
+  text-decoration: none;
+
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}

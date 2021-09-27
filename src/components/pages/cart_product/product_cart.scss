@@ -1,0 +1,48 @@
+.cart-control {
+  background-color: var(--color-white);
+  border-radius: 10px;
+  margin: 10px 0 10px 0;
+  max-width: fit-content;
+}
+
+.cart-control-order {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-yellow);
+
+  .item-list {
+    display: flex;
+    flex-direction: column;
+
+    .comanda-nome-hamburgueres-complementos {
+      font-size: 0.7rem;
+    }
+  }
+}
+
+.order-total {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  max-height: 40px;
+  max-width: 275px;
+
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 0 none;
+  outline: 0;
+  padding: 15px;
+
+  background-color: var(--color-white);
+}
+
+.finish-order-buttons {
+  display: flex;
+  margin-top: 10px;
+
+  .confirm-btn {
+    margin-left: 10px;
+  }
+}

@@ -1,11 +1,13 @@
-import './SignUp.scss'
-import Input from '../../components/UI/Input/Input'
-import Button from '../../components/UI/Button/Button.js';
 import { useState } from 'react';
-import { signUp } from '../../services/index'
 import { useHistory } from 'react-router-dom';
-import Modal from '../../components/Modal/index';
 import reactDom from 'react-dom';
+
+import './signup.scss'
+import Input from '../../components/UI/input/input'
+import Button from '../../components/UI/button/button';
+import Modal from '../../components/modal/index';
+
+import { signUp } from '../../services/index'
 
 export const SignUpPage = () => {
   const history = useHistory();
