@@ -42,7 +42,6 @@ describe("Tests for Router", () => {
   });
 
   test("Should render page Sobre for sobre route", () => {
-    
     Sobre.mockImplementation(() => <div>SobrePageMock</div>);
     
     render(
