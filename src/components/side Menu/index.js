@@ -1,5 +1,5 @@
 import Button from "../UI/Button/Button";
-import Img from "../UI/Image/Img";
+import Img from "../UI/image/img";
 import "./sideMenu.scss";
 import { AiFillEdit } from 'react-icons/ai';
 import { FaClipboardList, FaSignOutAlt } from 'react-icons/fa';
