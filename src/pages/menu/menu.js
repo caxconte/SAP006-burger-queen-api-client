@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react";
 
+<<<<<<< HEAD
 import AllDay from "../../components/menu_allday/allday";
+=======
+import Product from "../../components/pages/product_card/product";
+>>>>>>> 4c9b312b28b4cc8bc337a0a4e55dc9d3a27a8636
 import MenuArea from "../../components/pages/menu_area/menu_area";
 import CartArea from "../../components/pages/cart_area/cart_area";
 import MenuButtons from "../../components/pages/menu_buttons/menu_buttons";
 import SideMenu from "../../components/side_menu/sidemenu";
+<<<<<<< HEAD
 import Complements from "../../components/menu_allday/complements";
+=======
+>>>>>>> 4c9b312b28b4cc8bc337a0a4e55dc9d3a27a8636
 
 import { getProducts } from "../../services/data";
 
