@@ -70,3 +70,44 @@
     background-color: var(--color-green-hover);
   }
 }
+
+.button.secondary {
+  min-width: 70px;
+  max-width: 80px;
+  width: 70%;
+  height: 70px;
+  flex-wrap: wrap;
+  background: transparent;
+  border: 2px solid var(--color-yellow);
+  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  color: var(--color-yellow);
+  margin: 20px 5px 0 5px;
+  margin-top: 20px;
+  font-size: 10px;
+  
+  &:hover, .active {
+    color: var(--color-white);
+    background: var(--color-yellow);
+  }
+
+  span {
+    width: 100%;
+    font-size: 1.5rem;
+  }
+}
+
+.signout-btn {
+  background-color: transparent;
+  border: none;
+  color: black;
+  width: auto;
+
+  &:hover {
+    color: var(--color-yellow);
+  }
+
+  span {
+    font-size: 2rem;
+  }
+}
