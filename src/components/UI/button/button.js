@@ -1,9 +1,10 @@
 import "./button.scss";
 
-const Button = ({ variant, children, onClick }) => {
+const Button = ({ variant, children, onClick, testid, icon, span }) => {
   const className = `button ${variant}`;
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} onClick={onClick} data-testid={testid}>
+      <span className={span}>{icon}</span>
       {children}
     </button>
   );

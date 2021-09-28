@@ -5,15 +5,6 @@ function MenuButtons({ handleSelected }) {
 
   return (
     <nav className="menu-buttons">
-        {/* <Button
-          variant="menu-buttons-category"
-          onClick={handleAllDay}
-          value={"Todas as Categorias"}
-          type="button"
-          className="btn btn-menu-buttons-category"
-        >
-          Todas as Categorias
-        </Button> */}
 
         <Button
           variant="menu-buttons-category"

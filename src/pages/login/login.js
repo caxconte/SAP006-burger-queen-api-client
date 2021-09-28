@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import reactDom from "react-dom";
 
 import Input from "../../components/UI/input/input";
 import Button from "../../components/UI/button/button";
-import Modal from "../../components/modal/index";
+import Modal from "../../components/modal/modal";
+import Img from "../../components/UI/image/img";
 
 import { loginWithEmailAndPassword } from "../../services/index";
 
@@ -36,6 +36,31 @@ export const LoginPage = () => {
     return () => clearTimeout(timer);
   };
 
+  function initialStateModal() {
+    return { header: "", icon: "", children: "", isOpen: false };
+  }
+
+  const [modal, setModalValues] = useState(initialStateModal);
+  const ModalProps = (code, message) => {
+    let modalValues;
+    if (code !== undefined) {
+      modalValues = {
+        header: "Erro: " + code,
+        children: message,
+        icon: "error",
+        isOpen: true
+      }
+    } else {
+      modalValues = {
+        header: "Login efetuado com sucesso!",
+        icon: "success",
+        children: "Você será redirecionado em até 3 segundos...",
+        isOpen: true
+      }
+    }
+    setModalValues(modalValues);
+  }
+
   const onSubmit = (event) => {
     event.preventDefault();
     if (!values.email || mailFormat.test(values.email) === false) {
@@ -47,53 +72,29 @@ export const LoginPage = () => {
         .then((user) => {
           const token = user.token;
           const role = user.role;
-
           localStorage.setItem("userToken", token);
 
-          if (token !== null && role === "salao") {
-            reactDom.render(
-              <Modal
-                header="Login efetuado com sucesso!"
-                icon="success"
-                children="Você será redirecionado em até 3 segundos..."
-              />,
-              document.getElementById("modal")
-            );
-            navigateTo("/salao");
-          } else if (token !== null && role === "cozinha") {
-            reactDom.render(
-              <Modal
-                header="Login efetuado com sucesso!"
-                icon="success"
-                children="Você será redirecionado em até 3 segundos..."
-              />,
-              document.getElementById("modal")
-            );
-            navigateTo("/cozinha");
+          if (token !== undefined) {
+            console.log(token)
+            ModalProps()
+            navigateTo(`/${role}`);
           } else {
             const code = user.code;
             const message = user.message;
-            reactDom.render(
-              <Modal
-                header={"Erro: " + code}
-                children={message}
-                icon="error"
-              />,
-              document.getElementById("modal")
-            );
+            ModalProps(code, message);
           }
         })
         .catch((error) => {
           history.push("/ErrorPage");
-          throw Error(error.message);
+          // throw Error(error.message);
         });
     }
   };
 
   return (
     <section id="Login" className="Login">
-      <img
-        className="Logo"
+      <Img
+        className="logo"
         width="250px"
         height="250px"
         src="/Logo.png"
@@ -135,7 +136,15 @@ export const LoginPage = () => {
       <Link to="/signup" className="cadastre">
         Cadastre-se!
       </Link>
-      <div id="modal"></div>
+      <div id="modal">
+        <Modal
+          open={modal.isOpen}
+          onClose={() => setModalValues({ isOpen:false })}
+          header={modal.header}
+          icon={modal.icon}
+          children={modal.children}
+        />
+      </div>
     </section>
   );
 };
