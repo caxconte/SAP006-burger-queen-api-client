@@ -24,7 +24,7 @@ const validate = (values) => {
 }
 
 function initialStateModal() {
-  return { header: "", icon: "", testid: "", children: "", isOpen: false };
+  return { header: "", icon: "", testid: "", children: "", isOpen: false, type:"" };
 }
 
 function initialState() {
@@ -50,7 +50,8 @@ export const SignUpPage = () => {
         header: "Erro: " + code,
         children: message,
         icon: "error",
-        isOpen: true
+        isOpen: true,
+        type: "btn-on"
       }
     } else {
       modalValues = {
@@ -168,7 +169,8 @@ export const SignUpPage = () => {
           testid={modal.testid}
           header={modal.header}
           icon={modal.icon}
-          children={modal.children}>
+          children={modal.children}
+          type={modal.type}>
         </Modal>
       </div>
     </section>

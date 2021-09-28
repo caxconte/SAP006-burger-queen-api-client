@@ -37,7 +37,7 @@ export const LoginPage = () => {
   };
 
   function initialStateModal() {
-    return { header: "", icon: "", children: "", isOpen: false };
+    return { header: "", icon: "", children: "", isOpen: false, type:"" };
   }
 
   const [modal, setModalValues] = useState(initialStateModal);
@@ -48,13 +48,14 @@ export const LoginPage = () => {
         header: "Erro: " + code,
         children: message,
         icon: "error",
-        isOpen: true
+        isOpen: true,
+        type: "btn-on"
       }
     } else {
       modalValues = {
         header: "Login efetuado com sucesso!",
         icon: "success",
-        children: "Você será redirecionado em até 3 segundos...",
+        children: "Redirecionando...",
         isOpen: true
       }
     }
@@ -143,6 +144,7 @@ export const LoginPage = () => {
           header={modal.header}
           icon={modal.icon}
           children={modal.children}
+          type={modal.type}
         />
       </div>
     </section>
