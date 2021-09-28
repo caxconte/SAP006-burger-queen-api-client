@@ -1,24 +1,17 @@
 import Button from "../../UI/button/button";
 import "./menu_buttons.scss"
 
-function MenuButtons({ handleButtonTypeClick }) {
+function MenuButtons({ handleSelected }) {
+
   return (
     <nav className="menu-buttons">
-        <Button
-          variant="menu-buttons-category"
-          onClick={() => handleButtonTypeClick}
-          value={"Todas as Categorias"}
-          type="button"
-          className="btn btn-menu-buttons-category"
-        >
-          Todas as Categorias
-        </Button>
 
         <Button
           variant="menu-buttons-category"
-          onClick={() => handleButtonTypeClick}
+          onClick={handleSelected}
           value={"breakfast"}
           type="button"
+          id={"breakfast"}
           className="btn btn-menu-buttons-category"
         >
           Café da Manhã
@@ -26,9 +19,10 @@ function MenuButtons({ handleButtonTypeClick }) {
 
         <Button
           variant="menu-buttons-category"
-          onClick={() => handleButtonTypeClick}
+          onClick={handleSelected}
           value={"lunch"}
           type="button"
+          id={"all-day"}
           className="btn btn-menu-buttons-category"
         >
           Almoço/Jantar

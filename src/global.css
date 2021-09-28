@@ -22,6 +22,10 @@
   --color-white: #fff;
 }
 
+#root{
+  margin-left: 15%;
+}
+
 body {
   display: flex;
   justify-content: center;
