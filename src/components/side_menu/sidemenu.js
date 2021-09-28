@@ -4,7 +4,7 @@ import "./sideMenu.scss";
 import { AiFillEdit } from "react-icons/ai";
 import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
 
-const SideMenu = () => {
+function SideMenu() {
   const newEntry = () => {
     console.log("novo pedido")
   }

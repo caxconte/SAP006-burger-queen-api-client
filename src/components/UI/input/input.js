@@ -8,7 +8,6 @@ const Input = ({
   label,
   onChange,
   value,
-  testid
 }) => {
   const classes = `input ${variant}`;
   return (
@@ -20,7 +19,6 @@ const Input = ({
         name={name}
         onChange={onChange}
         value={value}
-        data-testid = {testid}
       ></input>
       {label}
     </label>
