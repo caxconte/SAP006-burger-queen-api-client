@@ -74,15 +74,12 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
         variant="confirm-btn"
         className="confirm-btn"
         onClick={() => {
-          console.log(selected);
-
           const filteredOrder = selected.find(
             (product) =>
             // console.log(product)
-            
-              product.flavor === value.sabor
-              // product.complement === value.adicionais &&
-              // product.name.includes(value.tipo)
+              product.flavor === value.sabor &&
+              product.complement === value.adicionais &&
+              product.name.includes(value.tipo)
           );
           console.log(filteredOrder);
         }}

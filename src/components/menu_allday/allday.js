@@ -1,7 +1,7 @@
 import Product from "../pages/product_card/product";
 import "./allday.scss";
 
-function AllDay({ onClick }) {
+function AllDay({ onClick, children }) {
   return (
     <>
       <Product
@@ -21,6 +21,10 @@ function AllDay({ onClick }) {
       >
         Hambúrguer Duplo
       </Product>
+
+      <section className="product">
+        {children}
+      </section>
     </>
   );
 }

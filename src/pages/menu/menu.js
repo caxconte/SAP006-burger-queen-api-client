@@ -26,7 +26,7 @@ export const Menu = () => {
     const button = e.target.textContent;
     if (button === "Almoço/Jantar") {
       console.log(button);
-      setSelected(allDay);
+
       setTab("Almoço/Jantar");
     } else {
       console.log(button);
@@ -48,12 +48,12 @@ export const Menu = () => {
   }, []);
 
   const [value, setValue] = useState({
-    tipo: null,
-    sabor: null,
+    tipo: "",
+    sabor: "",
     adicionais: null,
   });
 
-  useEffect(() => console.log(value.tipo), [value.tipo]);
+  useEffect(() => console.log(value), [value]);
 
   return (
     <>
