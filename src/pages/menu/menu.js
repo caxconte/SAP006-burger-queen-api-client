@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
-import Product from "../../components/pages/product_card/product";
+import AllDay from "../../components/menu_allday/allday";
 import MenuArea from "../../components/pages/menu_area/menu_area";
 import CartArea from "../../components/pages/cart_area/cart_area";
 import MenuButtons from "../../components/pages/menu_buttons/menu_buttons";
 import SideMenu from "../../components/side_menu/sidemenu";
+import Complements from "../../components/menu_allday/complements";
 
 import { getProducts } from "../../services/data";
 
@@ -17,29 +18,36 @@ export const Menu = () => {
   const [allDay, setAllDay] = useState([]);
   const [breakfast, setBreakfast] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [tab, setTab] = useState("Café da Manhã");
 
   function handleSelected(e) {
     const button = e.target.textContent;
     if (button === "Almoço/Jantar") {
       console.log(button);
       setSelected(allDay);
+      setTab("Almoço/Jantar");
     } else {
       console.log(button);
       setSelected(breakfast);
+      setTab("Café da Manhã");
     }
   }
 
   useEffect(() => {
     getProducts().then((list) => {
-      setAllDay(list);
+      setAllDay(
+        list.filter(
+          (item) => item.sub_type === "drinks" || item.sub_type === "side"
+        )
+      );
       setSelected(list);
       setBreakfast(list.filter((item) => item.type === "breakfast"));
     });
   }, []);
 
   const [value, setValue] = useState({
-    tipo: null,
-    sabor: null,
+    tipo: "",
+    sabor: "",
     adicionais: null,
   });
 
@@ -52,100 +60,41 @@ export const Menu = () => {
 
       <main className="big-container">
         <MenuArea>
-          <Product
-            img={"img/simple.png"}
-            name={"tipo"}
-            value={"hambúrguer simples"}
-            onClick={(e) => {
-              setValue({ ...value, tipo: e.target.value });
-            }}
-          >
-            Hambúrguer Simples
-          </Product>
-          <Product
-            img={"img/double.png"}
-            name={"tipo"}
-            value={"hambúrguer duplo"}
-            onClick={(e) => {
-              setValue({ ...value, tipo: e.target.value });
-            }}
-          >
-            Hambúrguer Duplo
-          </Product>
+          {tab === "Almoço/Jantar" ? (
+            <AllDay
+              onClick={(e) => {
+                setValue({ ...value, tipo: e.target.value });
+              }}
+            >
+              {value.tipo && (
+                <Complements
+                  value={value}
+                  selected={selected}
+                  handleFlavor={(e) =>
+                    setValue({ ...value, sabor: e.target.value })
+                  }
+                  handleExtra={(e) =>
+                    setValue({ ...value, adicionais: e.target.value })
+                  }
+                />
+              )}
 
-          <div className="inputs-tipo">
-            <label>
-              <input
-                onChange={(e) => setValue({ ...value, sabor: e.target.value })}
-                type="radio"
-                name="sabor"
-                value="carne"
-                id="carne"
-                required
-              />
-              Carne
-            </label>
-
-            <label>
-              <input
-                onChange={(e) => setValue({ ...value, sabor: e.target.value })}
-                type="radio"
-                name="sabor"
-                value="frango"
-                id="frango"
-              />
-              Frango
-            </label>
-            <label>
-              <input
-                onChange={(e) => setValue({ ...value, sabor: e.target.value })}
-                type="radio"
-                name="sabor"
-                value="veggie"
-                id="veggie"
-              />
-              Veggie
-            </label>
-          </div>
-          <div className="inputs-adicional">
-            <label>
-              <input
-                type="radio"
-                onChange={(e) =>
-                  setValue({ ...value, adicionais: e.target.value })
-                }
-                name="adicionais"
-                value="ovo"
-              />
-              ovo
-            </label>
-            <label>
-              <input
-                type="radio"
-                onChange={(e) =>
-                  setValue({ ...value, adicionais: e.target.value })
-                }
-                name="adicionais"
-                value="queijo"
-              />
-              queijo
-            </label>
-          </div>
-          <button
-            onClick={() => {
-              const filteredOrder = selected.filter(
-                (product) =>
-                  product.flavor === "carne" &&
-                  product.complement === "ovo" &&
-                  product.name.includes("simples")
-              );
-              console.log(filteredOrder);
-            }}
-          >
-            OK
-          </button>
+              {allDay.map((product) => {
+                return (
+                  <label>
+                    <li>
+                      <p>{product.name}</p>
+                      <p>R${product.price},00</p>
+                    </li>
+                  </label>
+                );
+              })}
+            </AllDay>
+          ) : <>
+          <p>OLÁ</p>
+            </> 
+          }
         </MenuArea>
-
         <CartArea />
       </main>
     </>
