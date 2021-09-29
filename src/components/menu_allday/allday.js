@@ -1,12 +1,13 @@
 import Product from "../pages/product_card/product";
+import "./allday.scss";
 
-function AllDay({ onClick, children, children2 }) {
+function AllDay({ onClick }) {
   return (
     <>
       <Product
         img={"img/simple.png"}
         name="tipo"
-        value="hambúrguer simples"
+        value="Hambúrguer simples"
         onClick={onClick}
       >
         Hambúrguer Simples
@@ -15,19 +16,11 @@ function AllDay({ onClick, children, children2 }) {
       <Product
         img={"img/double.png"}
         name="tipo"
-        value="hambúrguer duplo"
+        value="Hambúrguer duplo"
         onClick={onClick}
       >
         Hambúrguer Duplo
       </Product>
-
-      <section className="product">
-        {children2}
-      </section>
-
-      <ul>
-        {children}
-      </ul>
     </>
   );
 }

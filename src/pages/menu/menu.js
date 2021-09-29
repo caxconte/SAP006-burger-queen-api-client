@@ -6,10 +6,12 @@ import CartArea from "../../components/pages/cart_area/cart_area";
 import MenuButtons from "../../components/pages/menu_buttons/menu_buttons";
 import SideMenu from "../../components/side_menu/sidemenu";
 import Complements from "../../components/menu_allday/complements";
+import List from "../../components/list/list";
 
 import { getProducts } from "../../services/data";
 
 import "./menu.scss";
+import "../../components/menu_allday/allday.scss";
 import "../../components/pages/menu_area/menu_area.scss";
 
 // import Button from '../../components/UI/button/button';
@@ -46,12 +48,12 @@ export const Menu = () => {
   }, []);
 
   const [value, setValue] = useState({
-    tipo: "",
-    sabor: "",
+    tipo: null,
+    sabor: null,
     adicionais: null,
   });
 
-  useEffect(() => console.log(value), [value]);
+  useEffect(() => console.log(value.tipo), [value.tipo]);
 
   return (
     <>
@@ -61,39 +63,44 @@ export const Menu = () => {
       <main className="big-container">
         <MenuArea>
           {tab === "Almoço/Jantar" ? (
-            <AllDay
-              onClick={(e) => {
-                setValue({ ...value, tipo: e.target.value });
-              }}
-            >
-              {value.tipo && (
-                <Complements
-                  value={value}
-                  selected={selected}
-                  handleFlavor={(e) =>
-                    setValue({ ...value, sabor: e.target.value })
-                  }
-                  handleExtra={(e) =>
-                    setValue({ ...value, adicionais: e.target.value })
-                  }
-                />
-              )}
+            <>
+              <AllDay
+                onClick={(e) => {
+                  setValue({ ...value, tipo: e.target.value });
+                }}
+              >
+                {value.tipo && (
+                  <Complements
+                    value={value}
+                    selected={selected}
+                    handleFlavor={(e) =>
+                      setValue({ ...value, sabor: e.target.value })
+                    }
+                    handleExtra={(e) =>
+                      setValue({ ...value, adicionais: e.target.value })
+                    }
+                  />
+                )}
+              </AllDay>
 
-              {allDay.map((product) => {
-                return (
-                  <label>
-                    <li>
-                      <p>{product.name}</p>
-                      <p>R${product.price},00</p>
-                    </li>
-                  </label>
-                );
-              })}
-            </AllDay>
-          ) : <>
-          <p>OLÁ</p>
-            </> 
-          }
+              <List>
+                {allDay.map((product) => {
+                  return (
+                    <label className="allday" onClick={(e) => console.log(e)}>
+                      <li>
+                        <p className="allday-name">{product.name}</p>
+                        <p className="allday-price">R${product.price},00</p>
+                      </li>
+                    </label>
+                  );
+                })}
+              </List>
+            </>
+          ) : (
+            <>
+              <p>OLÁ</p>
+            </>
+          )}
         </MenuArea>
         <CartArea />
       </main>

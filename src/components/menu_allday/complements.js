@@ -1,9 +1,19 @@
+import Button from "../UI/button/button";
+import {
+  GiMeat,
+  GiChickenLeg,
+  GiFallingLeaf,
+  GiRawEgg,
+  GiCheeseWedge,
+} from "react-icons/gi";
+import "./allday.scss";
+
 function Complements({ value, handleFlavor, handleExtra, selected }) {
-  console.log(selected);
-  return (
+    return (
     <>
       <div className="inputs-tipo">
-        <label>
+        <label htmlFor="carne" className="meat-type">
+          <GiMeat size={20} />
           <input
             type="radio"
             onChange={handleFlavor}
@@ -15,7 +25,8 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
           Carne
         </label>
 
-        <label>
+        <label htmlFor="frango" className="meat-type">
+          <GiChickenLeg />
           <input
             type="radio"
             onChange={handleFlavor}
@@ -25,19 +36,21 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
           />
           Frango
         </label>
-        <label>
+        <label htmlFor="veggie" className="meat-type">
+          <GiFallingLeaf />
           <input
             type="radio"
             onChange={handleFlavor}
             name="sabor"
-            value="veggie"
+            value="vegetariano"
             id="veggie"
           />
           Veggie
         </label>
       </div>
       <div className="inputs-adicional">
-        <label>
+        <label className="extras">
+          <GiRawEgg />
           <input
             type="radio"
             onChange={handleExtra}
@@ -46,7 +59,8 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
           />
           ovo
         </label>
-        <label>
+        <label className="extras">
+          <GiCheeseWedge />
           <input
             type="radio"
             onChange={handleExtra}
@@ -56,21 +70,26 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
           queijo
         </label>
       </div>
-      <button
+      <Button
+        variant="confirm-btn"
+        className="confirm-btn"
         onClick={() => {
-          const filteredOrder = selected.filter(
+          console.log(selected);
+
+          const filteredOrder = selected.find(
             (product) =>
-              product.flavor === value.sabor &&
-              product.complement === value.adicionais
+            // console.log(product)
+            
+              product.flavor === value.sabor
+              // product.complement === value.adicionais &&
               // product.name.includes(value.tipo)
           );
           console.log(filteredOrder);
         }}
       >
         OK
-      </button>
+      </Button>
     </>
-  
   );
 }
 
