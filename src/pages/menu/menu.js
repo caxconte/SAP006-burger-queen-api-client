@@ -26,7 +26,6 @@ export const Menu = () => {
     const button = e.target.textContent;
     if (button === "Almoço/Jantar") {
       console.log(button);
-
       setTab("Almoço/Jantar");
     } else {
       console.log(button);
