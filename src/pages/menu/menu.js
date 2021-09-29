@@ -86,7 +86,11 @@ export const Menu = () => {
               <List>
                 {allDay.map((product) => {
                   return (
-                    <label className="allday" onClick={(e) => console.log(e)}>
+                    <label
+                      key={product.id}
+                      className="allday"
+                      onClick={(e) => console.log(e)}
+                    >
                       <li>
                         <p className="allday-name">{product.name}</p>
                         <p className="allday-price">R${product.price},00</p>

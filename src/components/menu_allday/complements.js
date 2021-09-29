@@ -13,7 +13,7 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
     <>
       <div className="inputs-tipo">
         <label htmlFor="carne" className="meat-type">
-          <GiMeat size={20} />
+          <GiMeat />
           <input
             type="radio"
             onChange={handleFlavor}
