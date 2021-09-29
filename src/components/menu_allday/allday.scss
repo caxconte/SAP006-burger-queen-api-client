@@ -1,0 +1,95 @@
+ul {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.allday {
+  display: flex;
+  flex-direction: row;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    border: 2px solid var(--color-yellow);
+    border-radius: 5px;
+    margin: 3px;
+
+    .allday-name {
+      width: 70%;
+      background-color: var(--color-yellow);
+      color: var(--color-white);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.12rem;
+    }
+
+    .allday-price {
+      display: flex;
+      width: 30%;
+      justify-content: right;
+      align-items: center;
+      background-color: var(--color-white);
+      color: var(--color-black);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.inputs-tipo {
+  display: flex;
+  justify-content: space-evenly;
+
+  .meat-type {
+    display: flex;
+    border-radius: 5px;
+    padding: 0.2rem 0.7rem;
+
+    background-color: var(--color-yellow);
+    color: var(--color-white);
+    font-weight: 700;
+    font-size: 0.9rem;
+
+    &:hover {
+      background-color: var(--color-yellow-hover);
+      color: var(--color-black);
+    }
+  }
+
+  input {
+    all: unset;
+  }
+}
+
+.inputs-adicional {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px 0 10px 0;
+
+  .extras {
+    display: flex;
+    border-radius: 5px;
+    padding: 0.2rem 1rem;
+
+    background-color: var(--color-yellow);
+    color: var(--color-white);
+    font-weight: 700;
+    font-size: 0.9rem;
+
+    &:hover {
+      background-color: var(--color-yellow-hover);
+      color: var(--color-black);
+    }
+  }
+
+  input {
+    all: unset;
+  }
+}
+
+.button.confirm-btn {
+  align-self: center;
+}
