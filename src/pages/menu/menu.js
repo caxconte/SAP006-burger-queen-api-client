@@ -6,6 +6,7 @@ import CartArea from "../../components/pages/cart_area/cart_area";
 import MenuButtons from "../../components/pages/menu_buttons/menu_buttons";
 import SideMenu from "../../components/side_menu/sidemenu";
 import Complements from "../../components/menu_allday/complements";
+import { Breakfast } from "../../components/menu_breakfast/breakfast";
 
 import { getProducts } from "../../services/data";
 
@@ -91,8 +92,10 @@ export const Menu = () => {
               })}
             </AllDay>
           ) : <>
-          <p>OLÁ</p>
-            </> 
+            <Breakfast
+              breakfastList={breakfast}
+              onClick={() => console.log('click')} />
+          </>
           }
         </MenuArea>
         <CartArea />
