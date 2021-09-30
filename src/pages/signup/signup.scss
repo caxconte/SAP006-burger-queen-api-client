@@ -17,3 +17,19 @@
   }
 
 }
+
+p {
+  color: var(--color-white);
+  margin-top: 10px;
+}
+
+.do-login {
+  margin-top: 5px;
+  color: var(--color-yellow);
+  font-weight: 900;
+  font-size: 0.8rem;
+  text-decoration: none;
+
+  justify-content: center;
+  align-items: center;
+}
