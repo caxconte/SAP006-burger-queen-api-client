@@ -1,0 +1,27 @@
+.kitchen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+  margin-left: 100px;
+
+  h1 {
+    color: var(--color-white);
+  }
+}
+
+.kitchen-todo,
+.kitchen-doing {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: auto;
+
+  width: 50%;
+}
+
+.kitchen-todo {
+  border-right: 3px solid var(--color-yellow);
+}

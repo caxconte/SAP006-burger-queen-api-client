@@ -1,36 +1,36 @@
 import Input from "../../UI/input/input";
 import "./cart_client.scss";
 
-function CartClient() {
+function CartClient({ handleClientName, handleClientTable, order}) {
   return (
     <div className="cart-control-client">
       <Input
         variant="client-name"
         placeholder="Nome do Cliente"
         type="text"
-        value=""
+        value={order}
         name="client-name"
-        onChange={(e) => console.log(e)}
+        onChange={handleClientName}
       />
 
       <select
         variant="client-table"
         placeholder="Mesa"
         type="select"
-        value="table"
+        value={order}
         className="client-table"
         name="client-table"
-        onChange={(e) => console.log(e)}
+        onChange={handleClientTable}
       >
-        <option value="mesa-um">Mesa 1</option>
-        <option value="mesa-dois">Mesa 2</option>
-        <option value="mesa-tres">Mesa 3</option>
-        <option value="mesa-quatro">Mesa 4</option>
-        <option value="mesa-cinco">Mesa 5</option>
-        <option value="mesa-seis">Mesa 6</option>
-        <option value="mesa-sete">Mesa 7</option>
-        <option value="mesa-oito">Mesa 8</option>
-        <option value="mesa-nove">Mesa 9</option>
+        <option value="1">Mesa 1</option>
+        <option value="2">Mesa 2</option>
+        <option value="3">Mesa 3</option>
+        <option value="4">Mesa 4</option>
+        <option value="5">Mesa 5</option>
+        <option value="6">Mesa 6</option>
+        <option value="7">Mesa 7</option>
+        <option value="8">Mesa 8</option>
+        <option value="9">Mesa 9</option>
       </select>
     </div>
   );

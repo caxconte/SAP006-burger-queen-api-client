@@ -1,4 +1,4 @@
-// import { render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 // import App from './App';
 
 // test('renders learn react link', () => {
@@ -8,19 +8,16 @@
 // });
 
 import { Routes } from "./Routes";
-import { Home } from './pages/Home/Home.js';
-import { LoginPage } from './pages/Login/Login.js';
-import { Sobre } from './pages/Sobre/Sobre.js';
-import { SignUpPage } from './pages/SignUp/index.js';
-import { ErrorPage } from './pages/PageNotFound/index.js';
-import { render, screen } from '@testing-library/react';
+import LoginPage from './pages/login/login.js';
+import { SignUpPage } from './pages/signup/signup.js';
+import { ErrorPage } from './pages/404/index.js';
+
 import { MemoryRouter } from 'react-router';
 
-jest.mock('./pages/Home/Home.js');
-jest.mock('./pages/Sobre/Sobre.js');
-jest.mock('./pages/PageNotFound/index.js');
-jest.mock('./pages/Login/Login.js');
-jest.mock('./pages/SignUp/index.js');
+jest.mock('./pages/home/home.js');
+jest.mock('./pages/404/index.js');
+jest.mock('./pages/login/login.js');
+jest.mock('./pages/signup/signup.js');
 
 describe("Tests for Router", () => {
   test("Should render page Login on default route", () => {
@@ -41,19 +38,6 @@ describe("Tests for Router", () => {
     expect(LoginPage).toHaveBeenCalledTimes(1);
   });
 
-  test("Should render page Sobre for sobre route", () => {
-    Sobre.mockImplementation(() => <div>SobrePageMock</div>);
-    
-    render(
-      <MemoryRouter initialEntries={['/sobre']}>
-        <Routes/>
-      </MemoryRouter>
-    );
-
-    expect(screen.getByText("SobrePageMock")).toBeInTheDocument();
-    expect(Sobre).toHaveBeenCalledTimes(1);
-  });
-
   test("Should render page SignUp for signup route", () => {
     
     SignUpPage.mockImplementation(() => <div>SignUpPageMock</div>);
@@ -68,7 +52,7 @@ describe("Tests for Router", () => {
     expect(SignUpPage).toHaveBeenCalledTimes(1);
   });
 
-  test("Should render page PageNotFound for invalid route", () => {
+  test("Should render page 404 for invalid route", () => {
     // Arrange
     ErrorPage.mockImplementation(() => <div>PageNotFoundMock</div>);
 

@@ -1,0 +1,44 @@
+.kitchen-article {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 10px;
+  min-height: 280px;
+  max-height: 280px;
+  min-width: 240px;
+  max-width: 240px;
+
+  border-radius: 10px;
+  background-color: var(--color-yellow);}
+
+.kitchen-article-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+
+  background-color: var(--color-white);
+  color: var(--color-black);
+
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.kitchen-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0 5px 0;
+  padding: 10px;
+  border-radius: 10px;
+  height: 180px;
+
+  background-color: var(--color-white);
+
+  overflow: auto;
+}
+
+.button.confirm-btn {
+  margin-top: 0;
+}
