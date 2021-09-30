@@ -23,7 +23,8 @@
 }
 
 #root{
-  margin-left: 15%;
+  width: 100vw;
+  height: 100vh;
 }
 
 body {
