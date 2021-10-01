@@ -19,8 +19,7 @@ export const Menu = () => {
   const [breakfast, setBreakfast] = useState([]);
   const [allItens, setSelected] = useState([]);
   const [tab, setTab] = useState("Café da Manhã");
-  
-
+ 
   function handleSelected(e) {
     const button = e.target.textContent;
     if (button === "Almoço/Jantar") {

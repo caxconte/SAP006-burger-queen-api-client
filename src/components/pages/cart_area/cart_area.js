@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CartClient from "../cart_client/cart_client";
 import CartItem from "../cart_product/product_cart";
 import BtnSection from "../cart_product/cart_buttons";
-import "./cart_area.scss"
+import { postOrders } from "../../../services/data";
+import "./cart_area.scss";
 
 function CartArea({ products, onClick, addItem, reduceItem }) {
   const [order, setOrder] = useState({
     client: "",
-    table: "",
+    table: "1",
     products: null,
   });
 
@@ -18,10 +19,6 @@ function CartArea({ products, onClick, addItem, reduceItem }) {
   function handleClientTable(e) {
     setOrder({ ...order, table: e.target.value });
   }
-
-  useEffect(() => {
-    console.log("order: ", order)
-  }, [order]);
 
   const productsResume = products.map((item) => {
     return {
@@ -34,6 +31,15 @@ function CartArea({ products, onClick, addItem, reduceItem }) {
     if (order.products === null) {
       setOrder({ ...order, products: [...productsResume] });
     }
+
+    postOrders(order)
+      .then((response) => {
+        console.log("resposta ",  response);
+       
+      })
+      .catch((error) => {
+        throw new Error(error.message);
+      });
   }
 
   return (
@@ -50,11 +56,8 @@ function CartArea({ products, onClick, addItem, reduceItem }) {
         reduceItem={reduceItem}
       />
 
-      <BtnSection confirm={handleProductsResume}/>
+      <BtnSection confirm={handleProductsResume} />
     </section >
   )
 }
-
 export default CartArea;
-
-// confirm={setOrder({ ...order, products: [productsResume]})}
