@@ -1,6 +1,6 @@
 import Button from "../../UI/button/button";
 
-function BtnSection() {
+function BtnSection({ confirm }) {
   return (
     <section className="finish-order-buttons">
       <Button
@@ -14,7 +14,11 @@ function BtnSection() {
       </Button>
       <Button
         variant="confirm-btn"
-        onClick={(e) => console.log(e, "clicou no confirmar")}
+        onClick={(e) => {
+          e.preventDefault();
+          console.log("clicou no confirmar");
+          confirm();
+        }}
         value={"Todas as Categorias"}
         type="button"
         className="confirm-btn"

@@ -19,6 +19,7 @@ export const Menu = () => {
   const [breakfast, setBreakfast] = useState([]);
   const [allItens, setSelected] = useState([]);
   const [tab, setTab] = useState("Café da Manhã");
+  
 
   function handleSelected(e) {
     const button = e.target.textContent;
@@ -68,8 +69,7 @@ export const Menu = () => {
     if (foundItem !== -1) {
       const updatedItemList = [...cartList];
       updatedItemList[foundItem].qtd++;
-      setCartList([...updatedItemList])
-      console.log("já tem ", cartList)
+      setCartList([...updatedItemList]);
     } else {
       setCartList([...cartList, allItens.find(
         (product) => {
@@ -87,8 +87,7 @@ export const Menu = () => {
     const foundItem = cartList.findIndex((item) => item.id === object.id);
     const updatedItemList = [...cartList];
     updatedItemList[foundItem].qtd++;
-    setCartList([...updatedItemList])
-    console.log("mais")
+    setCartList([...updatedItemList]);
   }
 
   const reduceQtd = (object) => {
@@ -100,8 +99,7 @@ export const Menu = () => {
       setCartList(updatedItemList);
     }
     else {
-      setCartList([...updatedItemList])
-      console.log("menos")
+      setCartList([...updatedItemList]);
     }
   }
 

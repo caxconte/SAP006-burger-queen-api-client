@@ -1,8 +1,8 @@
-import "./signup.scss"
+import "./signup.scss";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
-import Input from "../../components/UI/input/input"
+import Input from "../../components/UI/input/input";
 import Button from "../../components/UI/button/button";
 import Modal from "../../components/modal/modal";
 import Img from "../../components/UI/image/img";
@@ -10,18 +10,19 @@ import Img from "../../components/UI/image/img";
 import { signUp } from "../../services/index";
 
 const validate = (values) => {
-  const mailFormat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const mailFormat =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (!values.email || mailFormat.test(values.email) === false) {
-    return ("Escreva um email válido");
+    return "Escreva um email válido";
   } else if (!values.password || values.password.length < 6) {
-    return ("A senha deve ter no mínimo 6 dígitos");
+    return "A senha deve ter no mínimo 6 dígitos";
   } else if (values.password !== values.repeatPassword) {
-    return ("As senhas não conferem");
+    return "As senhas não conferem";
   } else if (!values.role) {
-    return ("Escolha o setor");
+    return "Escolha o setor";
   }
   return "";
-}
+};
 
 function initialStateModal() {
   return { header: "", icon: "", testid: "", children: "", isOpen: false, type:"" };
@@ -40,7 +41,7 @@ export const SignUpPage = () => {
       history.push(`/${path}`);
     }, 2000);
     return () => clearTimeout(timer);
-  }
+  };
 
   const [modal, setModalValues] = useState(initialStateModal);
   const ModalProps = (code, message) => {
@@ -58,11 +59,11 @@ export const SignUpPage = () => {
         header: "Cadastro realizado com sucesso!",
         icon: "success",
         children: "",
-        isOpen: true
-      }
+        isOpen: true,
+      };
     }
     setModalValues(modalValues);
-  }
+  };
 
   const SignUp = (event) => {
     event.preventDefault();
@@ -85,7 +86,7 @@ export const SignUpPage = () => {
           history.push("/ErrorPage");
         });
     }
-  }
+  };
 
   const [values, setValues] = useState(initialState);
 
@@ -95,7 +96,7 @@ export const SignUpPage = () => {
       ...values,
       [name]: value,
     });
-  }
+  };
 
   return (
     <section id="signUp" className="Login signUp">
@@ -104,7 +105,8 @@ export const SignUpPage = () => {
         width="250px"
         height="250px"
         src="/Logo.png"
-        alt="Astro Burger Logo" />
+        alt="Astro Burger Logo"
+      />
 
       <form id="signup_form">
         <fieldset>
@@ -114,8 +116,8 @@ export const SignUpPage = () => {
               placeholder="E-mail"
               type="email"
               name="email"
-              onChange={onChange}>
-            </Input>
+              onChange={onChange}
+            ></Input>
           </div>
           <div className="form-control">
             <Input
@@ -123,8 +125,8 @@ export const SignUpPage = () => {
               placeholder="Senha"
               type="password"
               name="password"
-              onChange={onChange}>
-            </Input>
+              onChange={onChange}
+            ></Input>
           </div>
           <div className="form-control">
             <Input
@@ -132,8 +134,8 @@ export const SignUpPage = () => {
               placeholder="Repita a Senha"
               type="password"
               name="repeatPassword"
-              onChange={onChange}>
-            </Input>
+              onChange={onChange}
+            ></Input>
           </div>
           <div className="Signup_radio-container">
             <Input
@@ -142,30 +144,36 @@ export const SignUpPage = () => {
               value="salao"
               name="role"
               label="salão"
-              onChange={onChange}>
-            </Input>
+              onChange={onChange}
+            ></Input>
             <Input
               testid="input-cozinha"
               type="radio"
               value="cozinha"
               name="role"
               label="cozinha"
-              onChange={onChange}>
-            </Input>
+              onChange={onChange}
+            ></Input>
           </div>
           <p className="paragraph-error">{errorNotice} &nbsp;</p>
         </fieldset>
-        <Button
-          onClick={SignUp}
-          variant="primary"
-          testid="signup-btn">
+        <Button onClick={SignUp} variant="primary" testid="signup-btn">
           cadastrar
         </Button>
       </form>
+
+      <p classname="have-account">
+        Já possui cadastro? Faça seu {" "}
+        <Link to="/" className="do-login">
+          LOGIN
+        </Link>
+        .
+      </p>
+
       <div id="modal">
         <Modal
           open={modal.isOpen}
-          onClose={() => setModalValues({ isOpen:false })}
+          onClose={() => setModalValues({ isOpen: false })}
           testid={modal.testid}
           header={modal.header}
           icon={modal.icon}
@@ -174,5 +182,5 @@ export const SignUpPage = () => {
         </Modal>
       </div>
     </section>
-  )
-}
+  );
+};

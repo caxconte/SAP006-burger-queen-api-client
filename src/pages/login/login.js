@@ -10,7 +10,7 @@ import { loginWithEmailAndPassword } from "../../services/index";
 
 import "./login.scss";
 
-export const LoginPage = () => {
+function LoginPage() {
   const history = useHistory();
   const [errorNotice, setError] = useState("");
   const mailFormat =
@@ -150,3 +150,5 @@ export const LoginPage = () => {
     </section>
   );
 };
+
+export default LoginPage;
