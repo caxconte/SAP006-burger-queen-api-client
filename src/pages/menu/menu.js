@@ -6,29 +6,25 @@ import CartArea from "../../components/pages/cart_area/cart_area";
 import MenuButtons from "../../components/pages/menu_buttons/menu_buttons";
 import SideMenu from "../../components/side_menu/sidemenu";
 import Complements from "../../components/menu_allday/complements";
-import { Breakfast } from "../../components/menu_breakfast/breakfast";
+import List from "../../components/list/list";
 
 import { getProducts } from "../../services/data";
 
 import "./menu.scss";
+import "../../components/menu_allday/allday.scss";
 import "../../components/pages/menu_area/menu_area.scss";
-
-// import Button from '../../components/UI/button/button';
 
 export const Menu = () => {
   const [allDay, setAllDay] = useState([]);
   const [breakfast, setBreakfast] = useState([]);
-  const [selected, setSelected] = useState([]);
+  const [allItens, setSelected] = useState([]);
   const [tab, setTab] = useState("Café da Manhã");
 
   function handleSelected(e) {
     const button = e.target.textContent;
     if (button === "Almoço/Jantar") {
-      console.log(button);
-      setSelected(allDay);
       setTab("Almoço/Jantar");
     } else {
-      console.log(button);
       setSelected(breakfast);
       setTab("Café da Manhã");
     }
@@ -52,7 +48,69 @@ export const Menu = () => {
     adicionais: null,
   });
 
-  useEffect(() => console.log(value), [value]);
+  const [cartList, setCartList] = useState([]);
+  function addHamburger(e) {
+    e.preventDefault();
+    const foundHamburger = allItens.find(
+      (product) =>
+        product.flavor === value.sabor &&
+        product.complement === value.adicionais &&
+        product.name.includes(value.tipo)
+    );
+    console.log("hamburger= ", foundHamburger)
+    addItem(e, foundHamburger.id)
+    setValue({ ...value, adicionais: null })
+  }
+
+  const addItem = (e, targetId) => {
+    e.preventDefault();
+    const foundItem = cartList.findIndex((item) => item.id === targetId);
+    if (foundItem !== -1) {
+      const updatedItemList = [...cartList];
+      updatedItemList[foundItem].qtd++;
+      setCartList([...updatedItemList])
+      console.log("já tem ", cartList)
+    } else {
+      setCartList([...cartList, allItens.find(
+        (product) => {
+          if (product.id === (targetId)) {
+            product.qtd = 1;
+            return product;
+          }
+          return null;
+        }
+      )]);
+    }
+  }
+
+  const addQtd = (object) => {
+    const foundItem = cartList.findIndex((item) => item.id === object.id);
+    const updatedItemList = [...cartList];
+    updatedItemList[foundItem].qtd++;
+    setCartList([...updatedItemList])
+    console.log("mais")
+  }
+
+  const reduceQtd = (object) => {
+    const foundItem = cartList.findIndex((item) => item.id === object.id);
+    const updatedItemList = [...cartList];
+    updatedItemList[foundItem].qtd--;
+    if (updatedItemList[foundItem].qtd === 0) {
+      updatedItemList.splice(foundItem, 1);
+      setCartList(updatedItemList);
+    }
+    else {
+      setCartList([...updatedItemList])
+      console.log("menos")
+    }
+  }
+
+  const deleteItem = (event, index) => {
+    event.preventDefault();
+    const updatedItemList = [...cartList];
+    updatedItemList.splice(index, 1);
+    setCartList(updatedItemList);
+  }
 
   return (
     <>
@@ -62,43 +120,37 @@ export const Menu = () => {
       <main className="big-container">
         <MenuArea>
           {tab === "Almoço/Jantar" ? (
-            <AllDay
-              onClick={(e) => {
-                setValue({ ...value, tipo: e.target.value });
-              }}
-            >
-              {value.tipo && (
-                <Complements
-                  value={value}
-                  selected={selected}
-                  handleFlavor={(e) =>
-                    setValue({ ...value, sabor: e.target.value })
-                  }
-                  handleExtra={(e) =>
-                    setValue({ ...value, adicionais: e.target.value })
-                  }
-                />
-              )}
+            <>
+              <AllDay
+                onClick={(e) => {
+                  setValue({ ...value, tipo: e.target.value });
+                }}
+              >
+                {value.tipo && (
+                  <Complements
+                    value={value}
+                    onClick={addHamburger}
+                    handleFlavor={(e) =>
+                      setValue({ ...value, sabor: e.target.value })
+                    }
+                    handleExtra={(e) =>
+                      setValue({ ...value, adicionais: e.target.value })
+                    }
+                  />
+                )}
+              </AllDay>
 
-              {allDay.map((product) => {
-                return (
-                  <label>
-                    <li>
-                      <p>{product.name}</p>
-                      <p>R${product.price},00</p>
-                    </li>
-                  </label>
-                );
-              })}
-            </AllDay>
-          ) : <>
-            <Breakfast
-              breakfastList={breakfast}
-              onClick={() => console.log('click')} />
-          </>
-          }
+              <List content={allDay} onClick={addItem} />
+            </>
+          ) : (
+            <List content={breakfast} onClick={addItem} />
+          )}
         </MenuArea>
-        <CartArea />
+        <CartArea
+          products={cartList}
+          onClick={deleteItem}
+          addItem={addQtd}
+          reduceItem={reduceQtd} />
       </main>
     </>
   );
