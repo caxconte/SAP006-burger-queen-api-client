@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import AllDay from "../../components/menu_allday/allday";
 import MenuArea from "../../components/pages/menu_area/menu_area";
@@ -19,7 +19,7 @@ export const Menu = () => {
   const [breakfast, setBreakfast] = useState([]);
   const [allItens, setSelected] = useState([]);
   const [tab, setTab] = useState("Café da Manhã");
- 
+
   function handleSelected(e) {
     const button = e.target.textContent;
     if (button === "Almoço/Jantar") {
@@ -109,6 +109,12 @@ export const Menu = () => {
     setCartList(updatedItemList);
   }
 
+  const formRef = useRef();
+  const handleCancel = () => {
+    formRef.current.reset();
+    setCartList([]);
+  }
+
   return (
     <>
       <SideMenu />
@@ -147,7 +153,9 @@ export const Menu = () => {
           products={cartList}
           onClick={deleteItem}
           addItem={addQtd}
-          reduceItem={reduceQtd} />
+          reduceItem={reduceQtd}
+          formRef={formRef}
+          handleCancel={handleCancel} />
       </main>
     </>
   );

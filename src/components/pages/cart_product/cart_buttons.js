@@ -1,13 +1,13 @@
 import Button from "../../UI/button/button";
 
-function BtnSection({ confirm }) {
+function BtnSection({ confirm, cancel }) {
   return (
     <section className="finish-order-buttons">
       <Button
         variant="cancel-btn"
         onClick={(e) => {
           e.preventDefault();
-          console.log("clicou no cancelar")
+          cancel();
         }}
         value={"Todas as Categorias"}
         type="button"

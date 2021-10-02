@@ -8,7 +8,7 @@ import Modal from "../../modal/modal";
 
 import "./cart_area.scss";
 
-function CartArea({ products, onClick, addItem, reduceItem }) {
+function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCancel }) {
   const history = useHistory();
   function initialStateModal() {
     return { header: "", icon: "", children: "", isOpen: false, type: "" };
@@ -62,6 +62,7 @@ function CartArea({ products, onClick, addItem, reduceItem }) {
     if (order.products === null) {
       setOrder({ ...order, products: [...productsResume] });
     }
+ 
     postOrders(order)
       .then((response) => {
         console.log("resposta ", response);
@@ -76,7 +77,6 @@ function CartArea({ products, onClick, addItem, reduceItem }) {
       .catch(() => {
         history.push("/ErrorPage");
       });
-
   }
 
   return (
@@ -85,6 +85,7 @@ function CartArea({ products, onClick, addItem, reduceItem }) {
         value={order}
         handleClientName={handleClientName}
         handleClientTable={handleClientTable}
+        formRef={formRef}
       />
       <CartItem
         itemList={products}
@@ -93,7 +94,7 @@ function CartArea({ products, onClick, addItem, reduceItem }) {
         reduceItem={reduceItem}
       />
 
-      <BtnSection confirm={handleProductsResume} />
+      <BtnSection confirm={handleProductsResume} cancel={handleCancel}/>
       <Modal
         open={modal.isOpen}
         onClose={() => setModalValues({ isOpen: false })}

@@ -1,9 +1,9 @@
 import Input from "../../UI/input/input";
 import "./cart_client.scss";
 
-function CartClient({ handleClientName, handleClientTable, order}) {
+function CartClient({ handleClientName, handleClientTable, order, formRef}) {
   return (
-    <div className="cart-control-client">
+    <form className="cart-control-client" ref={formRef}>
       <Input
         variant="client-name"
         placeholder="Nome do Cliente"
@@ -32,7 +32,7 @@ function CartClient({ handleClientName, handleClientTable, order}) {
         <option value="8">Mesa 8</option>
         <option value="9">Mesa 9</option>
       </select>
-    </div>
+    </form>
   );
 }
 
