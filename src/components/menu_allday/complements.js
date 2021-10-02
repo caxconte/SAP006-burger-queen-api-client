@@ -8,15 +8,15 @@ import {
 } from "react-icons/gi";
 import "./allday.scss";
 
-function Complements({ value, handleFlavor, handleExtra, selected }) {
-    return (
+function Complements({ handleFlavor, handleExtra, onClick }) {
+  return (
     <>
       <div className="inputs-tipo">
         <label htmlFor="carne" className="meat-type">
           <GiMeat />
           <input
             type="radio"
-            onChange={handleFlavor}
+            onClick={handleFlavor}
             name="sabor"
             value="carne"
             id="carne"
@@ -29,7 +29,7 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
           <GiChickenLeg />
           <input
             type="radio"
-            onChange={handleFlavor}
+            onClick={handleFlavor}
             name="sabor"
             value="frango"
             id="frango"
@@ -40,7 +40,7 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
           <GiFallingLeaf />
           <input
             type="radio"
-            onChange={handleFlavor}
+            onClick={handleFlavor}
             name="sabor"
             value="vegetariano"
             id="veggie"
@@ -53,7 +53,7 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
           <GiRawEgg />
           <input
             type="radio"
-            onChange={handleExtra}
+            onClick={handleExtra}
             name="adicionais"
             value="ovo"
           />
@@ -63,7 +63,7 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
           <GiCheeseWedge />
           <input
             type="radio"
-            onChange={handleExtra}
+            onClick={handleExtra}
             name="adicionais"
             value="queijo"
           />
@@ -73,16 +73,7 @@ function Complements({ value, handleFlavor, handleExtra, selected }) {
       <Button
         variant="confirm-btn"
         className="confirm-btn"
-        onClick={() => {
-          const filteredOrder = selected.find(
-            (product) =>
-            // console.log(product)
-              product.flavor === value.sabor &&
-              product.complement === value.adicionais &&
-              product.name.includes(value.tipo)
-          );
-          console.log(filteredOrder);
-        }}
+        onClick={onClick}
       >
         OK
       </Button>

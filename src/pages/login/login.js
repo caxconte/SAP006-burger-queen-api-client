@@ -37,24 +37,25 @@ function LoginPage() {
   };
 
   function initialStateModal() {
-    return { header: "", icon: "", children: "", isOpen: false };
+    return { header: "", icon: "", children: "", isOpen: false, type:"" };
   }
 
   const [modal, setModalValues] = useState(initialStateModal);
-  const ModalProps = (code, message) => {
+  const modalProps = (code, message) => {
     let modalValues;
     if (code !== undefined) {
       modalValues = {
         header: "Erro: " + code,
         children: message,
         icon: "error",
-        isOpen: true
+        isOpen: true,
+        type: "btn-on"
       }
     } else {
       modalValues = {
         header: "Login efetuado com sucesso!",
         icon: "success",
-        children: "Você será redirecionado em até 3 segundos...",
+        children: "Redirecionando...",
         isOpen: true
       }
     }
@@ -76,17 +77,16 @@ function LoginPage() {
 
           if (token !== undefined) {
             console.log(token)
-            ModalProps()
+            modalProps()
             navigateTo(`/${role}`);
           } else {
             const code = user.code;
             const message = user.message;
-            ModalProps(code, message);
+            modalProps(code, message);
           }
         })
         .catch((error) => {
           history.push("/ErrorPage");
-          // throw Error(error.message);
         });
     }
   };
@@ -143,6 +143,7 @@ function LoginPage() {
           header={modal.header}
           icon={modal.icon}
           children={modal.children}
+          type={modal.type}
         />
       </div>
     </section>
