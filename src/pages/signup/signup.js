@@ -149,7 +149,7 @@ export const SignUpPage = () => {
             <Input
               testid="input-cozinha"
               type="radio"
-              value="cozinha"
+              value="kitchen"
               name="role"
               label="cozinha"
               onChange={onChange}
@@ -162,7 +162,7 @@ export const SignUpPage = () => {
         </Button>
       </form>
 
-      <p classname="have-account">
+      <p className="have-account">
         Já possui cadastro? Faça seu {" "}
         <Link to="/" className="do-login">
           LOGIN
