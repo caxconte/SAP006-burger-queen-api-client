@@ -8,7 +8,7 @@ import Modal from "../../modal/modal";
 
 import "./cart_area.scss";
 
-function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCancel, orderResume }) {
+function CartArea({ products, onClick, addItem, reduceItem, formRef, handleReset, orderResume }) {
   const history = useHistory();
   function initialStateModal() {
     return { header: "", icon: "", children: "", isOpen: false, type: "" };
@@ -37,11 +37,11 @@ function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCance
     setModalValues(modalValues);
   }
 
-  const [order, setOrder] = useState({
+  const initialOrderState = {
     client: "anônimo",
     table: "1",
-    products: [],
-  });
+  }
+  const [order, setOrder] = useState(initialOrderState);
 
   function handleClientName(e) {
     setOrder({ ...order, client: e.target.value });
@@ -51,14 +51,20 @@ function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCance
     setOrder({ ...order, table: e.target.value });
   }
 
+  function resetOrder() {
+    handleReset();
+    setOrder(initialOrderState);
+  };
+
   function handleProductsResume(e) {
-    postOrders(order)
+    postOrders(order, productsResume)
       .then((response) => {
         console.log("resposta ", response);
         if (response.code) {
           const code = response.code;
           const message = response.message;
           modalProps(code, message);
+          resetOrder();
         } else {
           modalProps();
         }
@@ -68,9 +74,15 @@ function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCance
       });
   }
 
-  useEffect(()=>{
-    setOrder({ ...order, products: [...orderResume] }); 
-  },[orderResume]);
+  const [productsResume, setProductsResume] = useState([]);
+  useEffect(() => {
+    setProductsResume(...[orderResume]);
+  }, [orderResume]);
+
+  // useEffect(() => {
+  //   console.log("order", order)
+  //   console.log("productsResume", productsResume)
+  // })
 
   return (
     <section className="cart-area">
@@ -87,7 +99,9 @@ function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCance
         reduceItem={reduceItem}
       />
 
-      <BtnSection confirm={handleProductsResume} cancel={handleCancel} />
+      <BtnSection
+        confirm={handleProductsResume}
+        cancel={resetOrder} />
       <Modal
         open={modal.isOpen}
         onClose={() => setModalValues({ isOpen: false })}

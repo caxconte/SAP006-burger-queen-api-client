@@ -110,7 +110,7 @@ export const Menu = () => {
   }
 
   const formRef = useRef();
-  const handleCancel = () => {
+  const handleResetForm = () => {
     formRef.current.reset();
     setCartList([]);
   }
@@ -165,7 +165,7 @@ export const Menu = () => {
           addItem={addQtd}
           reduceItem={reduceQtd}
           formRef={formRef}
-          handleCancel={handleCancel}
+          handleReset={handleResetForm}
           orderResume={productsResume}/>
       </main>
     </>

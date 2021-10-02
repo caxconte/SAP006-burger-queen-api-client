@@ -13,7 +13,7 @@ export const getProducts = async () => {
   return response;
 };
 
-export const postOrders = async (order) => {
+export const postOrders = async (order, products) => {
   const url = "https://lab-api-bq.herokuapp.com/orders";
   const token = localStorage.getItem("userToken");
   const resp = await fetch(url, {
@@ -25,7 +25,7 @@ export const postOrders = async (order) => {
     body: JSON.stringify({
       client: order.client,
       table: order.table,
-      products: order.products
+      products: products
     }),
   });
   const response = await resp.json();
