@@ -115,6 +115,16 @@ export const Menu = () => {
     setCartList([]);
   }
 
+  const [productsResume, setProductsResume] = useState([]);
+  useEffect(()=>{
+    setProductsResume(cartList.map((item) => {
+      return {
+        id: item.id,
+        qtd: item.qtd,
+      }
+    }))
+  }, [cartList]); 
+
   return (
     <>
       <SideMenu />
@@ -155,7 +165,8 @@ export const Menu = () => {
           addItem={addQtd}
           reduceItem={reduceQtd}
           formRef={formRef}
-          handleCancel={handleCancel} />
+          handleCancel={handleCancel}
+          orderResume={productsResume}/>
       </main>
     </>
   );
