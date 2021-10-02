@@ -5,7 +5,10 @@ function BtnSection({ confirm }) {
     <section className="finish-order-buttons">
       <Button
         variant="cancel-btn"
-        onClick={(e) => console.log(e, "clicou no cancelar")}
+        onClick={(e) => {
+          e.preventDefault();
+          console.log("clicou no cancelar")
+        }}
         value={"Todas as Categorias"}
         type="button"
         className="cancel-btn"
@@ -16,7 +19,6 @@ function BtnSection({ confirm }) {
         variant="confirm-btn"
         onClick={(e) => {
           e.preventDefault();
-          console.log("clicou no confirmar");
           confirm();
         }}
         value={"Todas as Categorias"}

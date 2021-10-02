@@ -41,7 +41,7 @@ function LoginPage() {
   }
 
   const [modal, setModalValues] = useState(initialStateModal);
-  const ModalProps = (code, message) => {
+  const modalProps = (code, message) => {
     let modalValues;
     if (code !== undefined) {
       modalValues = {
@@ -77,17 +77,16 @@ function LoginPage() {
 
           if (token !== undefined) {
             console.log(token)
-            ModalProps()
+            modalProps()
             navigateTo(`/${role}`);
           } else {
             const code = user.code;
             const message = user.message;
-            ModalProps(code, message);
+            modalProps(code, message);
           }
         })
         .catch((error) => {
           history.push("/ErrorPage");
-          // throw Error(error.message);
         });
     }
   };

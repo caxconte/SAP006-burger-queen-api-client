@@ -42,7 +42,6 @@ export const getOrders = async () => {
       Authorization: `${token}`,
     },
   });
-
   const response = await resp.json();
   return response;
 };
