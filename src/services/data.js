@@ -33,7 +33,7 @@ export const postOrders = async (order) => {
 };
 
 export const getOrders = async () => {
-  const url = "https://lab-api-bq.herokuapp.com/products";
+  const url = "https://lab-api-bq.herokuapp.com/orders";
   const token = localStorage.getItem("userToken");
   const resp = await fetch(url, {
     method: "GET",
