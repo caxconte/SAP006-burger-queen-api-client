@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import Button from "../UI/button/button";
 import Img from "../UI/image/img";
 import "./sideMenu.scss";
@@ -5,9 +6,23 @@ import { AiFillEdit } from "react-icons/ai";
 import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
 
 function SideMenu() {
-  const newEntry = () => {
-    console.log("novo pedido")
+  const buttonHistory = useHistory();
+
+  const newOrder = () => {
+    buttonHistory.push("/salao");
+  };
+  const ordersInProgress = () => {
+    buttonHistory.push("/kitchen");
+  };
+
+  const ordersDone = () => {
+    buttonHistory.push("/orders-done");
   }
+
+  const logout = () => {
+    localStorage.clear();
+    buttonHistory.push("/");
+  };
 
   let iconStyles = { color: "var(--color-yellow)" };
 
@@ -18,39 +33,38 @@ function SideMenu() {
         width="100px"
         height="100px"
         src="/Logo.png"
-        alt="Astro Burger Logo" />
+        alt="Astro Burger Logo"
+      />
       <div className="menuButtons-container">
         <Button
           variant="secondary"
-          onClick={newEntry}
+          onClick={newOrder}
           icon={<AiFillEdit />}
-          children="novo pedido"></Button>
+          children="NOVO PEDIDO"
+        ></Button>
         <Button
           variant="secondary"
-          onClick={newEntry}
+          onClick={ordersDone}
           icon={<FaClipboardList />}
-          children="pedidos"></Button>
+          children="PEDIDOS PRONTOS"
+        ></Button>
         <Button
           variant="secondary"
-          onClick={newEntry}
+          onClick={ordersInProgress}
           span="material-icons"
           icon="table_restaurant"
-          children="mesas" ></Button>
-        <Button
-          variant="secondary"
-          onClick={newEntry}
-          span="material-icons"
-          icon="menu_book"
-          children="menu"></Button>
-      </div >
+          children="COZINHA"
+        ></Button>
+      </div>
 
-        <Button
-          variant="signout-btn"
-          span="signout-btnContainer"
-          onClick={newEntry}
-          icon={<FaSignOutAlt size={20} style={iconStyles}/>} ></Button>
+      <Button
+        variant="signout-btn"
+        span="signout-btnContainer"
+        onClick={logout}
+        icon={<FaSignOutAlt size={20} style={iconStyles} />}
+      ></Button>
     </section>
-  )
+  );
 }
 
 export default SideMenu;
