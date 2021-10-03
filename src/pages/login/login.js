@@ -10,11 +10,21 @@ import { loginWithEmailAndPassword } from "../../services/index";
 
 import "./login.scss";
 
+const validate = (values) => {
+  const mailFormat =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!values.email || mailFormat.test(values.email) === false) {
+    return "Escreva um email válido";
+  } else if (!values.password || values.password.length < 6) {
+    return "E-mail ou senha digitados incorretamente...";
+  }
+  return "";
+}
+
 function LoginPage() {
   const history = useHistory();
   const [errorNotice, setError] = useState("");
-  const mailFormat =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const [values, setValues] = useState({
     email: "",
@@ -37,7 +47,7 @@ function LoginPage() {
   };
 
   function initialStateModal() {
-    return { header: "", icon: "", children: "", isOpen: false, type:"" };
+    return { header: "", icon: "", children: "", isOpen: false, type: "" };
   }
 
   const [modal, setModalValues] = useState(initialStateModal);
@@ -64,11 +74,10 @@ function LoginPage() {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    if (!values.email || mailFormat.test(values.email) === false) {
-      setError("Escreva um email válido");
-    } else if (!values.password || values.password.length < 6) {
-      setError("E-mail ou senha digitados incorretamente...");
-    } else {
+    const invalid = validate(values);
+    setError(invalid);
+
+    if (!invalid) {
       loginWithEmailAndPassword(values.email, values.password)
         .then((user) => {
           const token = user.token;
@@ -139,7 +148,7 @@ function LoginPage() {
       <div id="modal">
         <Modal
           open={modal.isOpen}
-          onClose={() => setModalValues({ isOpen:false })}
+          onClose={() => setModalValues({ isOpen: false })}
           header={modal.header}
           icon={modal.icon}
           children={modal.children}

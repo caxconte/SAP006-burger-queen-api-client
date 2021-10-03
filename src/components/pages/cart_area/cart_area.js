@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { postOrders } from "../../../services/data";
 import { useHistory } from "react-router-dom";
 import CartClient from "../cart_client/cart_client";
@@ -8,7 +8,7 @@ import Modal from "../../modal/modal";
 
 import "./cart_area.scss";
 
-function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCancel }) {
+function CartArea({ products, onClick, addItem, reduceItem, formRef, handleReset, orderResume }) {
   const history = useHistory();
   function initialStateModal() {
     return { header: "", icon: "", children: "", isOpen: false, type: "" };
@@ -37,11 +37,11 @@ function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCance
     setModalValues(modalValues);
   }
 
-  const [order, setOrder] = useState({
-    client: "",
+  const initialOrderState = {
+    client: "anônimo",
     table: "1",
-    products: null,
-  });
+  }
+  const [order, setOrder] = useState(initialOrderState);
 
   function handleClientName(e) {
     setOrder({ ...order, client: e.target.value });
@@ -51,19 +51,13 @@ function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCance
     setOrder({ ...order, table: e.target.value });
   }
 
-  const productsResume = products.map((item) => {
-    return {
-      id: item.id,
-      qtd: item.qtd,
-    }
-  })
+  function resetOrder() {
+    handleReset();
+    setOrder(initialOrderState);
+  };
 
   function handleProductsResume(e) {
-    if (order.products === null) {
-      setOrder({ ...order, products: [...productsResume] });
-    }
- 
-    postOrders(order)
+    postOrders(order, productsResume)
       .then((response) => {
         console.log("resposta ", response);
         if (response.code) {
@@ -78,6 +72,16 @@ function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCance
         history.push("/ErrorPage");
       });
   }
+
+  const [productsResume, setProductsResume] = useState([]);
+  useEffect(() => {
+    setProductsResume(...[orderResume]);
+  }, [orderResume]);
+
+  // useEffect(() => {
+  //   console.log("order", order)
+  //   console.log("productsResume", productsResume)
+  // })
 
   return (
     <section className="cart-area">
@@ -94,10 +98,15 @@ function CartArea({ products, onClick, addItem, reduceItem, formRef, handleCance
         reduceItem={reduceItem}
       />
 
-      <BtnSection confirm={handleProductsResume} cancel={handleCancel}/>
+      <BtnSection
+        confirm={handleProductsResume}
+        cancel={resetOrder} />
       <Modal
         open={modal.isOpen}
-        onClose={() => setModalValues({ isOpen: false })}
+        onClose={() => {
+          resetOrder();
+          setModalValues({ isOpen: false })
+        }}
         header={modal.header}
         icon={modal.icon}
         children={modal.children}

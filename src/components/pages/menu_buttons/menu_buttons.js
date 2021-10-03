@@ -5,7 +5,6 @@ function MenuButtons({ handleSelected }) {
 
   return (
     <nav className="menu-buttons">
-
         <Button
           variant="menu-buttons-category"
           onClick={handleSelected}
