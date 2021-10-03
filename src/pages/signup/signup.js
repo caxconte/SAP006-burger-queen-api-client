@@ -25,7 +25,7 @@ const validate = (values) => {
 };
 
 function initialStateModal() {
-  return { header: "", icon: "", testid: "", children: "", isOpen: false };
+  return { header: "", icon: "", testid: "", children: "", isOpen: false, type:"" };
 }
 
 function initialState() {
@@ -52,7 +52,8 @@ export const SignUpPage = () => {
         children: message,
         icon: "error",
         isOpen: true,
-      };
+        type: "btn-on"
+      }
     } else {
       modalValues = {
         header: "Cadastro realizado com sucesso!",
@@ -148,7 +149,7 @@ export const SignUpPage = () => {
             <Input
               testid="input-cozinha"
               type="radio"
-              value="cozinha"
+              value="kitchen"
               name="role"
               label="cozinha"
               onChange={onChange}
@@ -161,7 +162,7 @@ export const SignUpPage = () => {
         </Button>
       </form>
 
-      <p classname="have-account">
+      <p className="have-account">
         Já possui cadastro? Faça seu {" "}
         <Link to="/" className="do-login">
           LOGIN
@@ -177,7 +178,8 @@ export const SignUpPage = () => {
           header={modal.header}
           icon={modal.icon}
           children={modal.children}
-        ></Modal>
+          type={modal.type}>
+        </Modal>
       </div>
     </section>
   );

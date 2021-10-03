@@ -9,6 +9,8 @@ function SideMenu() {
     console.log("novo pedido")
   }
 
+  let iconStyles = { color: "var(--color-yellow)" };
+
   return (
     <section className="sideMenu-container">
       <Img
@@ -46,7 +48,7 @@ function SideMenu() {
           variant="signout-btn"
           span="signout-btnContainer"
           onClick={newEntry}
-          icon={<FaSignOutAlt />} ></Button>
+          icon={<FaSignOutAlt size={20} style={iconStyles}/>} ></Button>
     </section>
   )
 }

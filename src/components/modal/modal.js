@@ -4,7 +4,7 @@ import Button from "../UI/button/button";
 import Overlay from "../UI/overlay/overlay";
 import "./modal.scss"
 
-const Modal = ({ open, children, onClose, header, icon }) => {
+const Modal = ({ open, children, onClose, header, icon, type }) => {
   if (!open) return null;
 
   let IconClass, iconStyle = "";
@@ -30,14 +30,17 @@ const Modal = ({ open, children, onClose, header, icon }) => {
           <p className="msg">{header}</p>
           <p>{children}</p>
         </div>
-        <Button
-          variant="primary"
-          onClick={onClose}
-          children="ok">
-        </Button>
+        {
+          type === "btn-on" &&
+          < Button
+            variant="primary"
+            onClick={onClose}
+            children="ok">
+          </Button>
+        }
       </div>
       <Overlay></Overlay>
-    </div>
+    </div >
   )
   return createPortal(ModalTemplate, root);
 }
