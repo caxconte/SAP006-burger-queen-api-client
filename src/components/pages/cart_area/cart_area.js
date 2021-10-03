@@ -64,7 +64,6 @@ function CartArea({ products, onClick, addItem, reduceItem, formRef, handleReset
           const code = response.code;
           const message = response.message;
           modalProps(code, message);
-          resetOrder();
         } else {
           modalProps();
         }
@@ -104,7 +103,10 @@ function CartArea({ products, onClick, addItem, reduceItem, formRef, handleReset
         cancel={resetOrder} />
       <Modal
         open={modal.isOpen}
-        onClose={() => setModalValues({ isOpen: false })}
+        onClose={() => {
+          resetOrder();
+          setModalValues({ isOpen: false })
+        }}
         header={modal.header}
         icon={modal.icon}
         children={modal.children}

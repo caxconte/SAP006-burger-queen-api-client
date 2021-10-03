@@ -7,7 +7,7 @@ import MenuButtons from "../../components/pages/menu_buttons/menu_buttons";
 import SideMenu from "../../components/side_menu/sidemenu";
 import Complements from "../../components/menu_allday/complements";
 import List from "../../components/list/list";
-
+import { filterList } from "../../data";
 import { getProducts } from "../../services/data";
 
 import "./menu.scss";
@@ -17,28 +17,19 @@ import "../../components/pages/menu_area/menu_area.scss";
 export const Menu = () => {
   const [allDay, setAllDay] = useState([]);
   const [breakfast, setBreakfast] = useState([]);
-  const [allItens, setSelected] = useState([]);
+  const [allItens, setAllItens] = useState([]);
   const [tab, setTab] = useState("Café da Manhã");
 
   function handleSelected(e) {
     const button = e.target.textContent;
-    if (button === "Almoço/Jantar") {
-      setTab("Almoço/Jantar");
-    } else {
-      setSelected(breakfast);
-      setTab("Café da Manhã");
-    }
+    setTab(button);
   }
 
   useEffect(() => {
     getProducts().then((list) => {
-      setAllDay(
-        list.filter(
-          (item) => item.sub_type === "drinks" || item.sub_type === "side"
-        )
-      );
-      setSelected(list);
-      setBreakfast(list.filter((item) => item.type === "breakfast"));
+      setAllItens(list);
+      setAllDay(filterList(list, "sub_type", "drinks", "side"));
+      setBreakfast(filterList(list, "type", "breakfast"));
     });
   }, []);
 
@@ -65,12 +56,11 @@ export const Menu = () => {
   const addItem = (e, targetId) => {
     e.preventDefault();
     const foundItem = cartList.findIndex((item) => item.id === targetId);
+    let updatedItemList = [...cartList];
     if (foundItem !== -1) {
-      const updatedItemList = [...cartList];
       updatedItemList[foundItem].qtd++;
-      setCartList([...updatedItemList]);
     } else {
-      setCartList([...cartList, allItens.find(
+      updatedItemList = [...cartList, allItens.find(
         (product) => {
           if (product.id === (targetId)) {
             product.qtd = 1;
@@ -78,8 +68,9 @@ export const Menu = () => {
           }
           return null;
         }
-      )]);
+      )];
     }
+    setCartList([...updatedItemList]);
   }
 
   const addQtd = (object) => {
@@ -95,11 +86,8 @@ export const Menu = () => {
     updatedItemList[foundItem].qtd--;
     if (updatedItemList[foundItem].qtd === 0) {
       updatedItemList.splice(foundItem, 1);
-      setCartList(updatedItemList);
     }
-    else {
-      setCartList([...updatedItemList]);
-    }
+    setCartList([...updatedItemList]);
   }
 
   const deleteItem = (event, index) => {
@@ -116,14 +104,14 @@ export const Menu = () => {
   }
 
   const [productsResume, setProductsResume] = useState([]);
-  useEffect(()=>{
+  useEffect(() => {
     setProductsResume(cartList.map((item) => {
       return {
         id: item.id,
         qtd: item.qtd,
       }
     }))
-  }, [cartList]); 
+  }, [cartList]);
 
   return (
     <>
@@ -166,7 +154,7 @@ export const Menu = () => {
           reduceItem={reduceQtd}
           formRef={formRef}
           handleReset={handleResetForm}
-          orderResume={productsResume}/>
+          orderResume={productsResume} />
       </main>
     </>
   );

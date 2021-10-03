@@ -44,7 +44,7 @@ export const SignUpPage = () => {
   };
 
   const [modal, setModalValues] = useState(initialStateModal);
-  const ModalProps = (code, message) => {
+  const modalProps = (code, message) => {
     let modalValues;
     if (code !== undefined) {
       modalValues = {
@@ -74,12 +74,12 @@ export const SignUpPage = () => {
       signUp(values.email, values.password, values.role)
         .then((response) => {
           if (response.token) {
-            ModalProps();
+            modalProps();
             timeOut(response.role);
           } else {
             const code = response.code;
             const message = response.message;
-            ModalProps(code, message);
+            modalProps(code, message);
           }
         })
         .catch((error) => {
