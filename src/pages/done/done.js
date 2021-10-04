@@ -8,10 +8,10 @@ export const Done = () => {
       <header>
         <h1>Pedidos Prontos</h1>
       </header>
-      <p>
+      <div>
         <SideMenu />
         <Link to="/about"> Ir para página Sobre</Link>
-      </p>
+      </div>
     </section>
   );
 };

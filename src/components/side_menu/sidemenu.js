@@ -14,18 +14,22 @@ import "./sideMenu.scss";
 function SideMenu() {
   const buttonHistory = useHistory();
 
-  const newOrder = () => {
+  const newOrder = (e) => {
+    e.preventDefault();
     buttonHistory.push("/salao");
   };
-  const ordersInProgress = () => {
+  const ordersInProgress = (e) => {
+    e.preventDefault();
     buttonHistory.push("/kitchen");
   };
 
-  const ordersDone = () => {
+  const ordersDone = (e) => {
+    e.preventDefault();
     buttonHistory.push("/done");
   };
 
-  const logout = () => {
+  const logout = (e) => {
+    e.preventDefault();
     localStorage.clear();
     buttonHistory.push("/");
   };
