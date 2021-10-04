@@ -1,4 +1,4 @@
-import Button from "../../UI/button/button";
+import Button from "../../../UI/button/button";
 
 function BtnSection({ confirm, cancel }) {
   return (

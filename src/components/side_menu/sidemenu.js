@@ -1,10 +1,6 @@
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
 import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
-
-import { getOrders } from "../../services/data";
-import { filterList, sortData } from "../../data";
 
 import Button from "../UI/button/button";
 import Img from "../UI/image/img";
@@ -18,6 +14,7 @@ function SideMenu() {
     e.preventDefault();
     buttonHistory.push("/salao");
   };
+
   const ordersInProgress = (e) => {
     e.preventDefault();
     buttonHistory.push("/kitchen");
@@ -35,14 +32,6 @@ function SideMenu() {
   };
 
   let iconStyles = { color: "var(--color-yellow)" };
-
-  const [doneOrderList, setDoneOrderList] = useState([]);
-
-  getOrders().then((list) => {
-    const filterDoneOrders = filterList(list, "status", "done");
-    const sortDoneOrderList = sortData(filterDoneOrders, "updatedAt");
-    setDoneOrderList(sortDoneOrderList);
-  });
 
   return (
     <section className="sideMenu-container">
@@ -65,9 +54,9 @@ function SideMenu() {
           onClick={ordersDone}
           id="pedidos-prontos"
           icon={<FaClipboardList />}
-
+          children="PEDIDO PRONTO"
         >
-          <label
+          {/* <label
             className="notificacao-position label-header"
             htmlFor="pedidos-prontos"
           >
@@ -80,7 +69,7 @@ function SideMenu() {
                 {doneOrderList.length}
               </label>
             ) : null}
-          </label>
+          </label> */}
         </Button>
         <Button
           variant="secondary"

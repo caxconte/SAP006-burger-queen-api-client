@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 
 import AllDay from "../../components/menu_allday/allday";
-import MenuArea from "../../components/pages/menu_area/menu_area";
-import CartArea from "../../components/pages/cart_area/cart_area";
-import MenuButtons from "../../components/pages/menu_buttons/menu_buttons";
+import MenuArea from "../../components/pages/salao/menu_area/menu_area";
+import CartArea from "../../components/pages/salao/cart_area/cart_area";
+import MenuButtons from "../../components/pages/salao/menu_buttons/menu_buttons";
 import SideMenu from "../../components/side_menu/sidemenu";
 import Complements from "../../components/menu_allday/complements";
 import List from "../../components/list/list";
@@ -12,7 +12,7 @@ import { getProducts } from "../../services/data";
 
 import "./menu.scss";
 import "../../components/menu_allday/allday.scss";
-import "../../components/pages/menu_area/menu_area.scss";
+import "../../components/pages/salao/menu_area/menu_area.scss";
 
 export const Menu = () => {
   const [allDay, setAllDay] = useState([]);

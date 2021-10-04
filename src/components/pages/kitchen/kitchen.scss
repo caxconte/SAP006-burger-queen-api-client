@@ -42,3 +42,11 @@
 .button.confirm-btn {
   margin-top: 0;
 }
+
+.kitchen-control-order {
+  display: flex;
+  flex-direction: column;
+  max-width: 100px;
+  margin-left: -100px;  
+  justify-content: flex-start;
+}
