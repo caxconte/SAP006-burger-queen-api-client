@@ -1,9 +1,15 @@
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
+import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
+import { AiFillEdit } from "react-icons/ai";
+
+import { getOrders } from "../../services/data";
+import { filterList, sortData } from "../../data";
+
 import Button from "../UI/button/button";
 import Img from "../UI/image/img";
+
 import "./sideMenu.scss";
-import { AiFillEdit } from "react-icons/ai";
-import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
 
 function SideMenu() {
   const buttonHistory = useHistory();
@@ -16,8 +22,8 @@ function SideMenu() {
   };
 
   const ordersDone = () => {
-    buttonHistory.push("/orders-done");
-  }
+    buttonHistory.push("/done");
+  };
 
   const logout = () => {
     localStorage.clear();
@@ -25,6 +31,14 @@ function SideMenu() {
   };
 
   let iconStyles = { color: "var(--color-yellow)" };
+
+  const [doneOrderList, setDoneOrderList] = useState([]);
+
+  getOrders().then((list) => {
+    const filterDoneOrders = filterList(list, "status", "done");
+    const sortDoneOrderList = sortData(filterDoneOrders, "updatedAt");
+    setDoneOrderList(sortDoneOrderList);
+  });
 
   return (
     <section className="sideMenu-container">
@@ -45,9 +59,25 @@ function SideMenu() {
         <Button
           variant="secondary"
           onClick={ordersDone}
+          id="pedidos-prontos"
           icon={<FaClipboardList />}
-          children="PEDIDOS PRONTOS"
-        ></Button>
+
+        >
+          <label
+            className="notificacao-position label-header"
+            htmlFor="pedidos-prontos"
+          >
+            PEDIDOS PRONTOS
+            {doneOrderList.length > 0 ? (
+              <label
+                htmlFor="pedidos-prontos"
+                className="notificacao-pedidos-prontos"
+              >
+                {doneOrderList.length}
+              </label>
+            ) : null}
+          </label>
+        </Button>
         <Button
           variant="secondary"
           onClick={ordersInProgress}
