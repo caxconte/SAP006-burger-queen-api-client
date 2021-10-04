@@ -10,23 +10,19 @@ import "./sideMenu.scss";
 function SideMenu() {
   const buttonHistory = useHistory();
 
-  const newOrder = (e) => {
-    e.preventDefault();
+  const newOrder = () => {
     buttonHistory.push("/salao");
   };
 
-  const ordersInProgress = (e) => {
-    e.preventDefault();
+  const ordersInProgress = () => {
     buttonHistory.push("/kitchen");
   };
 
-  const ordersDone = (e) => {
-    e.preventDefault();
+  const ordersDone = () => {
     buttonHistory.push("/done");
   };
 
-  const logout = (e) => {
-    e.preventDefault();
+  const logout = () => {
     localStorage.clear();
     buttonHistory.push("/");
   };
@@ -45,13 +41,19 @@ function SideMenu() {
       <div className="menuButtons-container">
         <Button
           variant="secondary"
-          onClick={newOrder}
+          onClick={(e) => {
+            e.preventDefault();
+            newOrder();
+          }}
           icon={<AiFillEdit />}
           children="NOVO PEDIDO"
         ></Button>
         <Button
           variant="secondary"
-          onClick={ordersDone}
+          onClick={(e) => {
+            e.preventDefault();
+            ordersDone();
+          }}
           id="pedidos-prontos"
           icon={<FaClipboardList />}
           children="PEDIDO PRONTO"
@@ -73,7 +75,10 @@ function SideMenu() {
         </Button>
         <Button
           variant="secondary"
-          onClick={ordersInProgress}
+          onClick={(e) => {
+            e.preventDefault();
+            ordersInProgress();
+          }}
           span="material-icons"
           icon="table_restaurant"
           children="COZINHA"
