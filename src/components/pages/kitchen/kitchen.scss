@@ -3,13 +3,15 @@
   flex-direction: column;
   margin: 10px;
   padding: 10px;
-  min-height: 280px;
-  max-height: 280px;
+  // min-height: 280px;
+  // max-height: 280px;
   min-width: 240px;
-  max-width: 240px;
+  max-width: 535px;
+  width: 85%;
 
   border-radius: 10px;
-  background-color: var(--color-yellow);}
+  background-color: var(--color-yellow);
+}
 
 .kitchen-article-header {
   display: flex;
@@ -27,18 +29,37 @@
 .kitchen-main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  // justifyo-cntent: center;
+  // align-items: center;
   margin: 5px 0 5px 0;
   padding: 10px;
   border-radius: 10px;
-  height: 180px;
+  // height: 180px;
+  max-height: 500px;
 
   background-color: var(--color-white);
 
   overflow: auto;
 }
 
-.button.confirm-btn {
-  margin-top: 0;
+.button .done-btn {
+  justify-content: start;
+}
+
+.kitchen-header-list {
+  display: flex;
+  font-weight: bold;
+    
+  .item-qdt-list {
+    width: 45px;
+  }
+}
+
+.item-qtd {
+  width: 20px;
+  margin-right: 15px;
+}
+
+.comanda-nome-hamburgueres-complementos {
+  font-size: 0.7rem;
 }

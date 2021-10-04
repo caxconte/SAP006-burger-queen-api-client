@@ -13,7 +13,7 @@ function OrderToDo({ onClick, list }) {
 
         <main className="kitchen-main">
           <div className="kitchen-control-order">
-            <div>
+            <div className="kitchen-header-list">
               <p className="item-qdt-list">Qdt</p>
               <p className="item-order-list">Item</p>
             </div>
@@ -33,7 +33,7 @@ function OrderToDo({ onClick, list }) {
           </Button>
         ) : (
           <Button
-            variant="confirm-btn"
+            variant="confirm-btn done-btn"
             onClick={(e) => {
               e.preventDefault();
               onClick(order.id, "done");
