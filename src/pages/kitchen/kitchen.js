@@ -9,11 +9,11 @@ import "./kitchen.scss";
 function Kitchen() {
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // const interval = setInterval(() => {
     getAllOrders();
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [])
+    // }, 10000);
+    // return () => clearInterval(interval);
+  }, []);
 
   function getAllOrders() {
     getOrders().then((list) => {
@@ -47,6 +47,7 @@ function Kitchen() {
 
   // useEffect(() => console.log("pending= ", pendingOrderList), [pendingOrderList]);
   // useEffect(() => console.log("inprogress= ", inProgressOrderList), [inProgressOrderList]);
+  // useEffect(() => console.log("done= ", doneOrderList), []);
 
   return (
     <>

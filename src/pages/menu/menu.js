@@ -48,9 +48,9 @@ export const Menu = () => {
         product.complement === value.adicionais &&
         product.name.includes(value.tipo)
     );
-    console.log("hamburger= ", foundHamburger)
-    addItem(e, foundHamburger.id)
-    setValue({ ...value, adicionais: null })
+    console.log("hamburger= ", foundHamburger);
+    addItem(e, foundHamburger.id);
+    setValue({ ...value, adicionais: null });
   }
 
   const addItem = (e, targetId) => {
@@ -78,7 +78,7 @@ export const Menu = () => {
     const updatedItemList = [...cartList];
     updatedItemList[foundItem].qtd++;
     setCartList([...updatedItemList]);
-  }
+  };
 
   const reduceQtd = (object) => {
     const foundItem = cartList.findIndex((item) => item.id === object.id);
@@ -95,13 +95,13 @@ export const Menu = () => {
     const updatedItemList = [...cartList];
     updatedItemList.splice(index, 1);
     setCartList(updatedItemList);
-  }
+  };
 
   const formRef = useRef();
   const handleResetForm = () => {
     formRef.current.reset();
     setCartList([]);
-  }
+  };
 
   const [productsResume, setProductsResume] = useState([]);
   useEffect(() => {

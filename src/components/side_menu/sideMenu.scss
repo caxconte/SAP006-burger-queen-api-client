@@ -1,6 +1,6 @@
 .sideMenu-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   background-color: var(--color-background-hover);
   width: 11%;
@@ -15,6 +15,7 @@
 
 .signout-btnContainer {
   transform: rotate(180deg);
+  margin-bottom: 20px;
 }
 
 .menuButtons-container {
@@ -24,5 +25,24 @@
 
   :first-child{
     margin-top: 0;
+  }
+}
+
+.notificacao-pedidos-prontos {
+  background-color: var(--color-yellow);
+  color: var(--color-white);
+  font-weight: 900;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  vertical-align: middle;
+  line-height: 2rem;
+  position: absolute;
+  top: 260px;
+  right: 0.3rem;
+
+  &:hover {
+    background-color: var(--color-yellow-hover);
+    color: var(--color-white);
   }
 }
