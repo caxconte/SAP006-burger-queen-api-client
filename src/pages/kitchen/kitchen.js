@@ -24,6 +24,7 @@ function Kitchen() {
       const filterInprogressOrders = filterList(list, "status", "in progress");
       const sortInprogressOrders = sortData(filterInprogressOrders, "updatedAt");  
       setInProgressOrderList(sortInprogressOrders);
+
     })
     .catch((error)=>{
       alert(error);
@@ -47,6 +48,7 @@ function Kitchen() {
 
   // useEffect(() => console.log("pending= ", pendingOrderList), [pendingOrderList]);
   // useEffect(() => console.log("inprogress= ", inProgressOrderList), [inProgressOrderList]);
+  // useEffect(() => console.log("done= ", doneOrderList), []);
 
   return (
     <>

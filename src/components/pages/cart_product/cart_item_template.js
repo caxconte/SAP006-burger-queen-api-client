@@ -1,9 +1,17 @@
-import { MdDeleteForever } from 'react-icons/md';
+import { MdDeleteForever } from "react-icons/md";
+import { IoMdAddCircle, IoMdRemoveCircle } from "react-icons/io";
 
-export default function CartItemTemplate({ object, index, deleteItem, addQtd, reduceQtd}) {
+export default function CartItemTemplate({
+  object,
+  index,
+  deleteItem,
+  addQtd,
+  reduceQtd,
+}) {
   const quantity = object.qtd;
-  const price = (object.price * quantity);
-  
+  const price = object.price * quantity;
+  let iconStyles = { color: "var(--color-yellow)" };
+
   return (
     <div className="cart-control-order">
       <div className="item-list">
@@ -21,20 +29,16 @@ export default function CartItemTemplate({ object, index, deleteItem, addQtd, re
       <div className="item-list-price">R${price},00</div>
 
       <div className="item-list-amount">
-        <input
-          className="button-manipulate-amount"
-          id="remove-qtd"
-          type="button"
-          value="-"
-          onClick={()=> reduceQtd(object)}
+        <IoMdRemoveCircle
+          size={18}
+          style={iconStyles}
+          onClick={() => reduceQtd(object)}
         />
         <article>{quantity}</article>
-        <input
-          className="button-manipulate-amount"
-          id="add-qtd"
-          type="button"
-          value="+"
-          onClick={()=> addQtd(object)}
+        <IoMdAddCircle
+          size={18}
+          style={iconStyles}
+          onClick={() => addQtd(object)}
         />
       </div>
 
@@ -42,11 +46,11 @@ export default function CartItemTemplate({ object, index, deleteItem, addQtd, re
         className="button-remove-item"
         id="remove-item"
         onClick={(event) => {
-          deleteItem(event, index)
-        }}>
-        <MdDeleteForever />
+          deleteItem(event, index);
+        }}
+      >
+        <MdDeleteForever size={18} />
       </button>
     </div>
-  )
+  );
 }
-
