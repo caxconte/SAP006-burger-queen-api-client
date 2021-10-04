@@ -1,4 +1,4 @@
-import Input from "../../UI/input/input";
+import Input from "../../../UI/input/input";
 import "./cart_client.scss";
 
 function CartClient({ handleClientName, handleClientTable, order, formRef}) {

@@ -9,10 +9,10 @@ import "./kitchen.scss";
 function Kitchen() {
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    // const interval = setInterval(() => {
     getAllOrders();
-    }, 2000);
-    return () => clearInterval(interval);
+    // }, 10000);
+    // return () => clearInterval(interval);
   }, [])
 
   function getAllOrders() {

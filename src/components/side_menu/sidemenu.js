@@ -1,10 +1,6 @@
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
 import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
-
-import { getOrders } from "../../services/data";
-import { filterList, sortData } from "../../data";
 
 import Button from "../UI/button/button";
 import Img from "../UI/image/img";
@@ -17,6 +13,7 @@ function SideMenu() {
   const newOrder = () => {
     buttonHistory.push("/salao");
   };
+
   const ordersInProgress = () => {
     buttonHistory.push("/kitchen");
   };
@@ -32,14 +29,6 @@ function SideMenu() {
 
   let iconStyles = { color: "var(--color-yellow)" };
 
-  const [doneOrderList, setDoneOrderList] = useState([]);
-
-  getOrders().then((list) => {
-    const filterDoneOrders = filterList(list, "status", "done");
-    const sortDoneOrderList = sortData(filterDoneOrders, "updatedAt");
-    setDoneOrderList(sortDoneOrderList);
-  });
-
   return (
     <section className="sideMenu-container">
       <Img
@@ -52,18 +41,24 @@ function SideMenu() {
       <div className="menuButtons-container">
         <Button
           variant="secondary"
-          onClick={newOrder}
+          onClick={(e) => {
+            e.preventDefault();
+            newOrder();
+          }}
           icon={<AiFillEdit />}
           children="NOVO PEDIDO"
         ></Button>
         <Button
           variant="secondary"
-          onClick={ordersDone}
+          onClick={(e) => {
+            e.preventDefault();
+            ordersDone();
+          }}
           id="pedidos-prontos"
           icon={<FaClipboardList />}
-
+          children="PEDIDO PRONTO"
         >
-          <label
+          {/* <label
             className="notificacao-position label-header"
             htmlFor="pedidos-prontos"
           >
@@ -76,11 +71,14 @@ function SideMenu() {
                 {doneOrderList.length}
               </label>
             ) : null}
-          </label>
+          </label> */}
         </Button>
         <Button
           variant="secondary"
-          onClick={ordersInProgress}
+          onClick={(e) => {
+            e.preventDefault();
+            ordersInProgress();
+          }}
           span="material-icons"
           icon="table_restaurant"
           children="COZINHA"
