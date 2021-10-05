@@ -13,7 +13,7 @@ function Kitchen() {
     getAllOrders();
     // }, 10000);
     // return () => clearInterval(interval);
-  }, []);
+  }, [])
 
   function getAllOrders() {
     getOrders().then((list) => {

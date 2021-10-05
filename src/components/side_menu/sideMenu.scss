@@ -3,10 +3,9 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-background-hover);
-  width: 11%;
-  min-width: 100px;
+  width: 100px;
   height: 100%;
-  position: absolute;
+  position: fixed;
   left:0;
   top:0;
   bottom: 0;
@@ -28,6 +27,16 @@
   }
 }
 
+.notificacao-position {
+  border-radius: 0.2rem;
+  padding: 0 0.5rem;
+  cursor: pointer;
+  text-align: center;
+  width: 100px;
+  align-self: center;
+  position: relative;
+}
+
 .notificacao-pedidos-prontos {
   background-color: var(--color-yellow);
   color: var(--color-white);
@@ -38,8 +47,8 @@
   vertical-align: middle;
   line-height: 2rem;
   position: absolute;
-  top: 260px;
-  right: 0.3rem;
+  top: -3.2rem;
+  right: -0.5rem;
 
   &:hover {
     background-color: var(--color-yellow-hover);

@@ -42,24 +42,14 @@
   overflow: auto;
 }
 
-.button .done-btn {
-  justify-content: start;
+.button.confirm-btn {
+  margin-top: 0;
 }
 
-.kitchen-header-list {
+.kitchen-control-order {
   display: flex;
-  font-weight: bold;
-    
-  .item-qdt-list {
-    width: 45px;
-  }
-}
-
-.item-qtd {
-  width: 20px;
-  margin-right: 15px;
-}
-
-.comanda-nome-hamburgueres-complementos {
-  font-size: 0.7rem;
+  flex-direction: column;
+  max-width: 100px;
+  margin-left: -100px;  
+  justify-content: flex-start;
 }

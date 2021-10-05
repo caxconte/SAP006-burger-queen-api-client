@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { postOrders } from "../../../services/data";
+import { postOrders } from "../../../../services/data";
 import { useHistory } from "react-router-dom";
-import CartClient from "../cart_client/cart_client";
-import CartItem from "../cart_product/product_cart";
-import BtnSection from "../cart_product/cart_buttons";
-import Modal from "../../modal/modal";
+import CartClient from "../../salao/cart_client/cart_client";
+import CartItem from "../../salao/cart_product/product_cart";
+import BtnSection from "../../salao/cart_product/cart_buttons";
+import Modal from "../../../modal/modal";
 
 import "./cart_area.scss";
 

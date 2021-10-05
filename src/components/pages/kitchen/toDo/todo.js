@@ -13,7 +13,7 @@ function OrderToDo({ onClick, list }) {
 
         <main className="kitchen-main">
           <div className="kitchen-control-order">
-            <div className="kitchen-header-list">
+            <div className="kitchen-control-order-header">
               <p className="item-qdt-list">Qdt</p>
               <p className="item-order-list">Item</p>
             </div>

@@ -1,4 +1,4 @@
-import Button from "../../UI/button/button";
+import Button from "../../../UI/button/button";
 import "./menu_buttons.scss"
 
 function MenuButtons({ handleSelected }) {

@@ -1,4 +1,4 @@
-import Product from "../pages/product_card/product";
+import Product from "../pages/salao/product_card/product";
 import "./allday.scss";
 
 function AllDay({ onClick, children }) {
