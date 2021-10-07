@@ -1,8 +1,19 @@
+import Img from "../../components/UI/image/img";
+
 export const ErrorPage = () => (
-  <div>
+  <div className="errorpage-container">
     <header>
-      <h1> Error </h1>
+      <Img
+        className="404"
+        width="250px"
+        height="250px"
+        src="/img/404.png"
+        alt="Page Not Found"
+      />
+
+      <h1>404</h1>
     </header>
-    <p> Page 404! </p>
+
+    <p>Acho que essa página não existe nesse universo... </p>
   </div>
 );
