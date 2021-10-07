@@ -15,6 +15,8 @@ import "../../components/menu_allday/allday.scss";
 import "../../components/pages/salao/menu_area/menu_area.scss";
 
 export const Menu = () => {
+  const role = localStorage.getItem("userRole");
+
   const [allDay, setAllDay] = useState([]);
   const [breakfast, setBreakfast] = useState([]);
   const [allItens, setAllItens] = useState([]);
@@ -60,18 +62,19 @@ export const Menu = () => {
     if (foundItem !== -1) {
       updatedItemList[foundItem].qtd++;
     } else {
-      updatedItemList = [...cartList, allItens.find(
-        (product) => {
-          if (product.id === (targetId)) {
+      updatedItemList = [
+        ...cartList,
+        allItens.find((product) => {
+          if (product.id === targetId) {
             product.qtd = 1;
             return product;
           }
           return null;
-        }
-      )];
+        }),
+      ];
     }
     setCartList([...updatedItemList]);
-  }
+  };
 
   const addQtd = (object) => {
     const foundItem = cartList.findIndex((item) => item.id === object.id);
@@ -88,7 +91,7 @@ export const Menu = () => {
       updatedItemList.splice(foundItem, 1);
     }
     setCartList([...updatedItemList]);
-  }
+  };
 
   const deleteItem = (event, index) => {
     event.preventDefault();
@@ -105,57 +108,66 @@ export const Menu = () => {
 
   const [productsResume, setProductsResume] = useState([]);
   useEffect(() => {
-    setProductsResume(cartList.map((item) => {
-      return {
-        id: item.id,
-        qtd: item.qtd,
-      }
-    }))
+    setProductsResume(
+      cartList.map((item) => {
+        return {
+          id: item.id,
+          qtd: item.qtd,
+        };
+      })
+    );
   }, [cartList]);
 
   return (
     <>
-      <SideMenu />
-      <MenuButtons handleSelected={handleSelected} />
+      {role === "salao" ? (
+        <>
+          <SideMenu />
+          <MenuButtons handleSelected={handleSelected} />
 
-      <main className="big-container">
-        <MenuArea>
-          {tab === "Almoço/Jantar" ? (
-            <>
-              <AllDay
-                onClick={(e) => {
-                  setValue({ ...value, tipo: e.target.value });
-                }}
-              >
-                {value.tipo && (
-                  <Complements
-                    value={value}
-                    onClick={addHamburger}
-                    handleFlavor={(e) =>
-                      setValue({ ...value, sabor: e.target.value })
-                    }
-                    handleExtra={(e) =>
-                      setValue({ ...value, adicionais: e.target.value })
-                    }
-                  />
-                )}
-              </AllDay>
+          <main className="big-container">
+            <MenuArea>
+              {tab === "Almoço/Jantar" ? (
+                <>
+                  <AllDay
+                    onClick={(e) => {
+                      setValue({ ...value, tipo: e.target.value });
+                    }}
+                  >
+                    {value.tipo && (
+                      <Complements
+                        value={value}
+                        onClick={addHamburger}
+                        handleFlavor={(e) =>
+                          setValue({ ...value, sabor: e.target.value })
+                        }
+                        handleExtra={(e) =>
+                          setValue({ ...value, adicionais: e.target.value })
+                        }
+                      />
+                    )}
+                  </AllDay>
 
-              <List content={allDay} onClick={addItem} />
-            </>
-          ) : (
-            <List content={breakfast} onClick={addItem} />
-          )}
-        </MenuArea>
-        <CartArea
-          products={cartList}
-          onClick={deleteItem}
-          addItem={addQtd}
-          reduceItem={reduceQtd}
-          formRef={formRef}
-          handleReset={handleResetForm}
-          orderResume={productsResume} />
-      </main>
+                  <List content={allDay} onClick={addItem} />
+                </>
+              ) : (
+                <List content={breakfast} onClick={addItem} />
+              )}
+            </MenuArea>
+            <CartArea
+              products={cartList}
+              onClick={deleteItem}
+              addItem={addQtd}
+              reduceItem={reduceQtd}
+              formRef={formRef}
+              handleReset={handleResetForm}
+              orderResume={productsResume}
+            />
+          </main>
+        </>
+      ) : (
+        <h1>NAO MEXE AQUI</h1>
+      )}
     </>
   );
 };
