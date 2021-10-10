@@ -1,5 +1,8 @@
 .cart-control-client {
   flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px; 
+  width: 100%;
 }
 
 .client-table {
@@ -11,4 +14,5 @@
 
   margin-left: 10px;
   background-color: var(--color-white);
+  height: 3rem;
 }

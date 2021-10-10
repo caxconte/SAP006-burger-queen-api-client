@@ -1,9 +1,8 @@
 .cart-control {
   background-color: var(--color-white);
   border-radius: 10px;
-  margin: 10px 0 10px 0;
-  max-width: 300px;
-  height: 220px;
+  min-height: 354px;
+  width: 100%;
   overflow: auto;
 }
 
@@ -13,13 +12,14 @@
   align-items: center;
   justify-content: space-between;
   max-height: 80px;
-  width: 280px;
+  width: 100%;
   font-size: 0.8rem;
   border-bottom: 1px solid var(--color-yellow);
 
   .item-list {
     display: flex;
     flex-direction: column;
+    width: 40%;
 
     .comanda-nome-hamburgueres-titulo {
       display: flex;
@@ -33,15 +33,15 @@
     }
   }
 
-
   .item-list-price {
     font-weight: 700;
+    width: 56px;
   }
 
   .item-list-amount {
     display: flex;
-    width: 80px;
-    justify-content: space-evenly;
+    width: 70px;
+    justify-content: space-between;
   }
 
   .button-remove-item {
@@ -57,6 +57,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
   border-radius: 10px;
   max-height: 40px;
 
@@ -71,9 +72,5 @@
 
 .finish-order-buttons {
   display: flex;
-  margin-top: 10px;
-
-  .confirm-btn {
-    margin-left: 10px;
-  }
+  justify-content: space-between;
 }

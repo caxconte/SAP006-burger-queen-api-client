@@ -4,25 +4,26 @@ import "./allday.scss";
 function AllDay({ onClick, children }) {
   return (
     <>
-      <Product
-        img={"img/simple.png"}
-        name="tipo"
-        value="Hambúrguer simples"
-        onClick={onClick}
-      >
-        Hambúrguer Simples
-      </Product>
+      <div className="hamburger-container">
+        <Product
+          img={"img/simple.png"}
+          name="tipo"
+          value="Hambúrguer simples"
+          onClick={onClick}
+        >
+          Hambúrguer Simples
+        </Product>
 
-      <Product
-        img={"img/double.png"}
-        name="tipo"
-        value="Hambúrguer duplo"
-        onClick={onClick}
-      >
-        Hambúrguer Duplo
-      </Product>
-
-      <section className="product">
+        <Product
+          img={"img/double.png"}
+          name="tipo"
+          value="Hambúrguer duplo"
+          onClick={onClick}
+        >
+          Hambúrguer Duplo
+        </Product>
+      </div>
+      <section className="complements">
         {children}
       </section>
     </>

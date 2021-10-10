@@ -1,27 +1,62 @@
 .kitchen {
   display: flex;
-  // align-items: center;
   justify-content: center;
   margin-top: 5%;
   margin-left: 100px;
+  height: 100vh;
 
   h1 {
     color: var(--color-white);
+    width: 100%;
   }
 }
 
 .kitchen-todo,
 .kitchen-doing {
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   overflow: auto;
 
   width: 50%;
+
+  h1 {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .kitchen-todo {
   border-right: 3px solid var(--color-yellow);
+}
+
+.kitchen-done,
+.kitchen-history {
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  max-width: 1040px;
+  margin: auto;
+  align-items: flex-start;
+
+  .kitchen-article {
+    width: 250px;
+  }
+}
+
+.kitchen-done-container,
+.kitchen-history-container {
+  width: 100%;
+  
+  h1 {
+    text-align: center;
+  }
+}
+
+.kitchen-header-history {
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: var(--color-white);
+  padding: 10px;
 }

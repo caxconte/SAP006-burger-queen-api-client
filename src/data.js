@@ -7,6 +7,6 @@ export const filterList = (list, prop, status, status2) => {
 
 export const sortData = (data, sortBy) => {
   return data.sort((a, b) => {
-    return a[sortBy] > b[sortBy] ? 1 : a[sortBy] < b[sortBy] ? -1 : 0
+    return a[sortBy] > b[sortBy] ? 1 : a[sortBy] < b[sortBy] ? -1 : 0;
   })
 }

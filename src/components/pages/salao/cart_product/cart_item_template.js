@@ -18,9 +18,11 @@ export default function CartItemTemplate({
         <article className="comanda-nome-hamburgueres-titulo">
           {object.name}
         </article>
+
         <article className="comanda-nome-hamburgueres-complementos">
           {object.flavor}
         </article>
+        
         <article className="comanda-nome-hamburgueres-complementos">
           {object.complement}
         </article>

@@ -84,6 +84,7 @@ function LoginPage() {
           const role = user.role;
           localStorage.setItem("userToken", token);
           localStorage.setItem("userRole", role);
+          localStorage.setItem("userId", user.id);
 
           if (token !== undefined) {
             console.log(token)

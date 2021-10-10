@@ -24,6 +24,7 @@ export const Menu = () => {
 
   function handleSelected(e) {
     const button = e.target.textContent;
+    console.log(button);
     setTab(button);
   }
 
@@ -50,7 +51,7 @@ export const Menu = () => {
         product.complement === value.adicionais &&
         product.name.includes(value.tipo)
     );
-    console.log("hamburger= ", foundHamburger);
+    // console.log("hamburger= ", foundHamburger);
     addItem(e, foundHamburger.id);
     setValue({ ...value, adicionais: null });
   }
