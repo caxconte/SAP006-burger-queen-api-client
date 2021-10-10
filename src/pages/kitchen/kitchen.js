@@ -24,7 +24,6 @@ function Kitchen() {
       const filterInprogressOrders = filterList(list, "status", "in progress");
       const sortInprogressOrders = sortData(filterInprogressOrders, "updatedAt");  
       setInProgressOrderList(sortInprogressOrders);
-
     })
     .catch((error)=>{
       alert(error);

@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import SideMenu from "../../components/side_menu/sidemenu";
-import OrderDone from "../../components/pages/done/done_item";
 
 import { getOrders, updateOrders } from "../../services/data"
 import { filterList, sortData } from "../../data";
 
 import "./done.scss";
 import "../kitchen/kitchen.scss";
+import OrderToDo from "../../components/pages/kitchen/toDo/todo";
 
 export const Done = () => {
-  const [ doneOrderList, setOrderList ] = useState([]);
-  const [ historyOrderList, setHistoryOrderList ] = useState([]);
+  const [doneOrderList, setOrderList] = useState([]);
 
   useEffect(() => {
     // const interval = setInterval(() => {
@@ -22,22 +21,18 @@ export const Done = () => {
   function getDone() {
     getOrders().then((list) => {
       const filterDoneOrders = filterList(list, "status", "done");
-      const sortDoneOrders = sortData(filterDoneOrders, "createdAt");  
+      const sortDoneOrders = sortData(filterDoneOrders, "createdAt");
       setOrderList(sortDoneOrders);
-
-      const historyOrderList = filterList(list, "status", "delivered");
-      const sortHistoryOrderList = sortData(historyOrderList, "createdAt");  
-      setHistoryOrderList(sortHistoryOrderList);
     })
-    .catch((error)=>{
-      alert(error);
-    })
+      .catch((error) => {
+        alert(error);
+      })
   }
 
   function handleOrderStatusChange(orderId, status) {
     updateOrders(orderId, status)
       .then((order) => {
-        if(order.code) {
+        if (order.code) {
           alert(`${order.code}: ${order.message}`);
         }
       })
@@ -50,17 +45,12 @@ export const Done = () => {
     <>
       <SideMenu />
       <section className="kitchen">
-
-        <section className="kitchen-done">
+        <div className="kitchen-done-container">
           <h1>Pedidos Prontos ({doneOrderList.length})</h1>
-          <OrderDone list={doneOrderList} onClick={handleOrderStatusChange} />
-        </section>
-
-        <section className="kitchen-history">
-          <h1>Histórico de Pedidos ({historyOrderList.length})</h1>
-          <OrderDone list={historyOrderList} />
-        </section>
-
+          <div className="kitchen-done">
+            <OrderToDo list={doneOrderList} onClick={handleOrderStatusChange} />
+          </div>
+        </div>
       </section>
     </>
   );

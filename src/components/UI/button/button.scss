@@ -6,7 +6,8 @@
   align-items: center;
   padding: 5px;
   width: 100px;
-  height: 25px;
+  height: 38px;
+  text-transform: uppercase;
 }
 
 .button {
@@ -23,7 +24,6 @@
   border-radius: 5px;
   transition: 0.5s;
 
-  text-transform: uppercase;
   font-weight: 700;
 
   &:hover {
@@ -41,8 +41,8 @@
   outline: 0;
   border-radius: 5px;
   transition: 0.5s;
+  margin-top: 10px;
 
-  text-transform: uppercase;
   font-weight: 500;
 
   &:hover {
@@ -60,10 +60,9 @@
   outline: 0;
   border-radius: 5px;
   transition: 0.5s;
-  margin-top: 0;
+  margin-top: 10px;
 
   width: 165px;
-  text-transform: uppercase;
   font-weight: 500;
 
   &:hover {
@@ -71,7 +70,7 @@
   }
 }
 
-.button.confirm-btn {
+.confirm-btn {
   @include buttonProps;
 
   background: var(--color-green);
@@ -81,9 +80,9 @@
   outline: 0;
   border-radius: 5px;
   transition: 0.5s;
+  margin-top: 10px;
 
   width: 165px;
-  text-transform: uppercase;
   font-weight: 500;
 
   &:hover {
@@ -105,6 +104,7 @@
   margin: 20px 5px 0 5px;
   margin-top: 20px;
   font-size: 10px;
+  text-transform: uppercase;
   
   &:hover, .active {
     color: var(--color-white);

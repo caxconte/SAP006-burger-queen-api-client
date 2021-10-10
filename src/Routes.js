@@ -5,6 +5,7 @@ import { ErrorPage } from './pages/404/index';
 import { SignUpPage } from './pages/signup/signup';
 import LoginPage from './pages/login/login';
 import Kitchen from './pages/kitchen/kitchen';
+import History from './pages/history/history';
 
 export const Routes = () => {
   return (
@@ -14,6 +15,7 @@ export const Routes = () => {
       <Route path='/salao' component={Menu} />
       <Route path='/kitchen' component={Kitchen} />
       <Route path='/signup' component={SignUpPage} />
+      <Route path='/history' component={History} />
       <Route component={ErrorPage} />
     </Switch>
   );
