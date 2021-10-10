@@ -51,17 +51,21 @@ function OrderToDo({ onClick, list }) {
           </>
         ) : null}
 
-        {order.status === "done" && (
-          <Button
-            variant="start-btn"
-            onClick={(e) => {
-              e.preventDefault();
-              onClick(order.id, "delivered");
-            }}
-          >
-            Pedido Entregue
-          </Button>
-        )}
+        {role === "salao" ? (
+          <>
+            {order.status === "done" && (
+              <Button
+                variant="start-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onClick(order.id, "delivered");
+                }}
+              >
+                Pedido Entregue
+              </Button>
+            )}
+          </>
+        ) : null}
       </article>
     );
   });
