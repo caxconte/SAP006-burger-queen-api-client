@@ -7,6 +7,7 @@ import MenuButtons from "../../components/pages/salao/menu_buttons/menu_buttons"
 import SideMenu from "../../components/side_menu/sidemenu";
 import Complements from "../../components/menu_allday/complements";
 import List from "../../components/list/list";
+import { Unauthorized } from "../../pages/unauthorized/unauthorized";
 import { filterList } from "../../data";
 import { getProducts } from "../../services/data";
 
@@ -167,7 +168,7 @@ export const Menu = () => {
           </main>
         </>
       ) : (
-        <h1>NAO MEXE AQUI</h1>
+        <Unauthorized />
       )}
     </>
   );

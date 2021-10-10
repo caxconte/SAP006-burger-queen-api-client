@@ -5,14 +5,15 @@ import "../kitchen.scss";
 
 function OrderToDo({ onClick, list }) {
   const userId = parseInt(localStorage.getItem("userId"));
-  
+  const role = localStorage.getItem("userRole");
+
   return list.map((order) => {
     const orderUserId = order.user_id;
     let variant;
     if (orderUserId === userId) {
       variant = "important";
     } else {
-      variant="";
+      variant = "";
     }
 
     const classes = `kitchen-article ${variant}`;
@@ -22,32 +23,35 @@ function OrderToDo({ onClick, list }) {
         <TodoHeader order={order} />
 
         <TodoMain order={order} />
-        
-        {(order.status === "pending" &&
-          <Button
-            variant="start-btn"
-            onClick={(e) => {
-              e.preventDefault();
-              onClick(order.id, "in progress");
-            }}
-          >
-            Começar Pedido
-          </Button>
-        )}
+        {role === "kitchen" ? (
+          <>
+            {order.status === "pending" && (
+              <Button
+                variant="start-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onClick(order.id, "in progress");
+                }}
+              >
+                Começar Pedido
+              </Button>
+            )}
 
-        {(order.status === "in progress" &&
-          <Button
-            variant="confirm-btn done-btn"
-            onClick={(e) => {
-              e.preventDefault();
-              onClick(order.id, "done");
-            }}
-          >
-            Pedido Pronto
-          </Button>
-        )}
+            {order.status === "in progress" && (
+              <Button
+                variant="confirm-btn done-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onClick(order.id, "done");
+                }}
+              >
+                Pedido Pronto
+              </Button>
+            )}
+          </>
+        ) : null}
 
-        {(order.status === "done" &&
+        {order.status === "done" && (
           <Button
             variant="start-btn"
             onClick={(e) => {
@@ -60,7 +64,7 @@ function OrderToDo({ onClick, list }) {
         )}
       </article>
     );
-  })
+  });
 }
 
 export default OrderToDo;
