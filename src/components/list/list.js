@@ -1,6 +1,6 @@
 function List({ content, onClick }) {
   return (
-    <>
+    <div className="allday-container">
       {content.map((product) => {
         return (
           <ul key={product.id}>
@@ -17,7 +17,7 @@ function List({ content, onClick }) {
         );
       })
       }
-    </>
+    </div>
   )
 }
 

@@ -1,27 +1,29 @@
 import Button from "../../../UI/button/button";
-import OrderItem from "./todo_order_itens";
+import TodoHeader from "./todo_header";
+import TodoMain from "./todo_main";
 import "../kitchen.scss";
 
 function OrderToDo({ onClick, list }) {
+  const userId = parseInt(localStorage.getItem("userId"));
+  
   return list.map((order) => {
+    const orderUserId = order.user_id;
+    let variant;
+    if (orderUserId === userId) {
+      variant = "important";
+    } else {
+      variant="";
+    }
+
+    const classes = `kitchen-article ${variant}`;
+
     return (
-      <article className="kitchen-article" key={order.id}>
-        <header className="kitchen-article-header">
-          <p>Mesa {order.table}</p>
-          <p>{order.client_name}</p>
-        </header>
+      <article className={classes} key={order.id}>
+        <TodoHeader order={order} />
 
-        <main className="kitchen-main">
-          <div className="kitchen-control-order">
-            <div className="kitchen-control-order-header">
-              <p className="item-qdt-list">Qdt</p>
-              <p className="item-order-list">Item</p>
-            </div>
-            <OrderItem order={order} />
-          </div>
-        </main>
-
-        {(order.status === "pending") ? (
+        <TodoMain order={order} />
+        
+        {(order.status === "pending" &&
           <Button
             variant="start-btn"
             onClick={(e) => {
@@ -31,7 +33,9 @@ function OrderToDo({ onClick, list }) {
           >
             Começar Pedido
           </Button>
-        ) : (
+        )}
+
+        {(order.status === "in progress" &&
           <Button
             variant="confirm-btn done-btn"
             onClick={(e) => {
@@ -43,6 +47,17 @@ function OrderToDo({ onClick, list }) {
           </Button>
         )}
 
+        {(order.status === "done" &&
+          <Button
+            variant="start-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              onClick(order.id, "delivered");
+            }}
+          >
+            Pedido Entregue
+          </Button>
+        )}
       </article>
     );
   })

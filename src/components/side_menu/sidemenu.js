@@ -22,6 +22,10 @@ function SideMenu() {
     buttonHistory.push("/done");
   };
 
+  const ordersHistory = () => {
+    buttonHistory.push("/history");
+  };
+
   const logout = () => {
     localStorage.clear();
     buttonHistory.push("/");
@@ -46,7 +50,7 @@ function SideMenu() {
             newOrder();
           }}
           icon={<AiFillEdit />}
-          children="NOVO PEDIDO"
+          children="novo pedido"
         ></Button>
         <Button
           variant="secondary"
@@ -56,7 +60,7 @@ function SideMenu() {
           }}
           id="pedidos-prontos"
           icon={<FaClipboardList />}
-          children="PEDIDO PRONTO"
+          children="pedido pronto"
         >
           {/* <label
             className="notificacao-position label-header"
@@ -81,7 +85,17 @@ function SideMenu() {
           }}
           span="material-icons"
           icon="table_restaurant"
-          children="COZINHA"
+          children="cozinha"
+        ></Button>
+         <Button
+          variant="secondary"
+          onClick={(e) => {
+            e.preventDefault();
+            ordersHistory();
+          }}
+          span="material-icons"
+          icon="table_restaurant"
+          children="histórico"
         ></Button>
       </div>
 

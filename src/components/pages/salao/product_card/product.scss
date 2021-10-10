@@ -1,7 +1,6 @@
 .product {
   display: flex;
   justify-content: center;
-  margin: 10px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -19,13 +18,17 @@
     border-radius: 0 0 0.3rem 0.3rem;
     background-color: var(--color-yellow);
     color: var(--color-white);
-    padding: 0.25rem 0.6rem;
+    // padding: 0.25rem 0.6rem;
     max-width: 80px;
     position: relative;
     margin-top: -0.5rem;
     text-align: center;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     font-weight: 600;
     box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
+
+    &:hover {
+      color: black;
+    }
   }
 }

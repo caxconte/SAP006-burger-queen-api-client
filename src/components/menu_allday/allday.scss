@@ -1,12 +1,19 @@
 ul {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
+  // display: flex;
+  // flex-direction: column;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.allday-container {
+  width: 100%;
+  margin-bottom: 0;
 }
 
 .allday {
   display: flex;
   flex-direction: row;
+  height: 2.7rem;
 
   li {
     display: flex;
@@ -18,12 +25,18 @@ ul {
     margin: 3px;
 
     .allday-name {
+      display: flex;
+      align-items: center;
       width: 70%;
       background-color: var(--color-yellow);
       color: var(--color-white);
       font-weight: 700;
       font-size: 0.9rem;
       padding: 0.12rem;
+
+      &:hover {
+        color: black;
+      }
     }
 
     .allday-price {
@@ -42,9 +55,11 @@ ul {
 .inputs-tipo {
   display: flex;
   justify-content: space-evenly;
+  width: 100%;
 
   .meat-type {
     display: flex;
+    align-items: center;
     border-radius: 5px;
     padding: 0.2rem 0.7rem;
 
@@ -67,10 +82,12 @@ ul {
 .inputs-adicional {
   display: flex;
   justify-content: space-evenly;
+  width: 100%;
   margin: 10px 0 10px 0;
 
   .extras {
     display: flex;
+    align-items: center;
     border-radius: 5px;
     padding: 0.2rem 1rem;
 
@@ -90,6 +107,35 @@ ul {
   }
 }
 
-// .button.confirm-btn {
-//   align-self: center;
-// }
+.hamburger-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+
+.complements {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  label {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+
+  input {
+    height: 25px;
+  }
+
+  button {
+    height: 30px;
+    width: 90px;
+  }
+
+  svg {
+    margin-right: 5px;
+  }
+}

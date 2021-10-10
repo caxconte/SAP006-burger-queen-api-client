@@ -3,17 +3,35 @@
   flex-direction: column;
   margin: 10px;
   padding: 10px;
-  // min-height: 280px;
-  // max-height: 280px;
   min-width: 240px;
-  max-width: 535px;
+  max-width: 350px;
   width: 85%;
 
   border-radius: 10px;
   background-color: var(--color-yellow);
+
+  &.important {
+    background-color: var(--color-brown);
+  }
 }
 
 .kitchen-article-header {
+  display: flex;
+  justify-content: space-between;
+
+  .header-client-table {
+    flex: 1 0 auto;
+    margin-right: 10px;
+  }
+
+  .header-order-id {
+    width: 60px;
+    justify-content: center;
+  }
+}
+
+.header-client-table,
+.header-order-id {
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -29,12 +47,8 @@
 .kitchen-main {
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-  margin: 5px 0 5px 0;
-  padding: 10px;
+  margin: 10px 0 0 0;
   border-radius: 10px;
-  // height: 180px;
   max-height: 500px;
 
   background-color: var(--color-white);
@@ -42,14 +56,42 @@
   overflow: auto;
 }
 
-.button.confirm-btn {
-  margin-top: 0;
-}
-
 .kitchen-control-order {
   display: flex;
   flex-direction: column;
-  max-width: 100px;
-  margin-left: -100px;  
-  justify-content: flex-start;
+  width: 100%;
+
+  .kitchen-control-order-header {
+    display: flex;
+    flex-wrap: nowrap;
+    font-weight: bold;
+    padding: 7px;
+    border-bottom: 1px solid rgb(250, 124, 6);
+
+    .item-qtd-list {
+      text-align: center;
+      width: 30px;
+      margin-right: 20px;
+    }
+  }
+
+  .cart-control-order {
+    justify-content: start;
+
+    .item-qtd {
+      width: 30px;
+      text-align: center;
+      margin-right: 20px;
+    }
+
+    .item-product {
+      .comanda-nome-titulo {
+        font-size: 0.8rem;
+      }
+
+      .comanda-nome-hamburgueres-complementos {
+        font-size: 0.7rem;
+      }
+    }
+  }
 }

@@ -48,7 +48,7 @@ export const Menu = () => {
         product.complement === value.adicionais &&
         product.name.includes(value.tipo)
     );
-    console.log("hamburger= ", foundHamburger);
+    // console.log("hamburger= ", foundHamburger);
     addItem(e, foundHamburger.id);
     setValue({ ...value, adicionais: null });
   }
@@ -119,42 +119,44 @@ export const Menu = () => {
 
       <main className="big-container">
         <MenuButtons handleSelected={handleSelected} />
-        <MenuArea>
-          {tab === "Almoço/Jantar" ? (
-            <>
-              <AllDay
-                onClick={(e) => {
-                  setValue({ ...value, tipo: e.target.value });
-                }}
-              >
-                {value.tipo && (
-                  <Complements
-                    value={value}
-                    onClick={addHamburger}
-                    handleFlavor={(e) =>
-                      setValue({ ...value, sabor: e.target.value })
-                    }
-                    handleExtra={(e) =>
-                      setValue({ ...value, adicionais: e.target.value })
-                    }
-                  />
-                )}
-              </AllDay>
+        <div className="menu-cart-container">
+          <MenuArea>
+            {tab === "Almoço/Jantar" ? (
+              <>
+                <AllDay
+                  onClick={(e) => {
+                    setValue({ ...value, tipo: e.target.value });
+                  }}
+                >
+                  {value.tipo && (
+                    <Complements
+                      value={value}
+                      onClick={addHamburger}
+                      handleFlavor={(e) =>
+                        setValue({ ...value, sabor: e.target.value })
+                      }
+                      handleExtra={(e) =>
+                        setValue({ ...value, adicionais: e.target.value })
+                      }
+                    />
+                  )}
+                </AllDay>
 
-              <List content={allDay} onClick={addItem} />
-            </>
-          ) : (
-            <List content={breakfast} onClick={addItem} />
-          )}
-        </MenuArea>
-        <CartArea
-          products={cartList}
-          onClick={deleteItem}
-          addItem={addQtd}
-          reduceItem={reduceQtd}
-          formRef={formRef}
-          handleReset={handleResetForm}
-          orderResume={productsResume} />
+                <List content={allDay} onClick={addItem} />
+              </>
+            ) : (
+              <List content={breakfast} onClick={addItem} />
+            )}
+          </MenuArea>
+          <CartArea
+            products={cartList}
+            onClick={deleteItem}
+            addItem={addQtd}
+            reduceItem={reduceQtd}
+            formRef={formRef}
+            handleReset={handleResetForm}
+            orderResume={productsResume} />
+        </div>
       </main>
     </>
   );
