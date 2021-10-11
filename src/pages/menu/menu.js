@@ -7,6 +7,7 @@ import MenuButtons from "../../components/pages/salao/menu_buttons/menu_buttons"
 import SideMenu from "../../components/side_menu/sidemenu";
 import Complements from "../../components/menu_allday/complements";
 import List from "../../components/list/list";
+import { Unauthorized } from "../../pages/unauthorized/unauthorized";
 import { filterList } from "../../data";
 import { getProducts } from "../../services/data";
 
@@ -15,6 +16,8 @@ import "../../components/menu_allday/allday.scss";
 import "../../components/pages/salao/menu_area/menu_area.scss";
 
 export const Menu = () => {
+  const role = localStorage.getItem("userRole");
+
   const [allDay, setAllDay] = useState([]);
   const [breakfast, setBreakfast] = useState([]);
   const [allItens, setAllItens] = useState([]);
@@ -22,6 +25,7 @@ export const Menu = () => {
 
   function handleSelected(e) {
     const button = e.target.textContent;
+    console.log(button);
     setTab(button);
   }
 
@@ -60,18 +64,19 @@ export const Menu = () => {
     if (foundItem !== -1) {
       updatedItemList[foundItem].qtd++;
     } else {
-      updatedItemList = [...cartList, allItens.find(
-        (product) => {
-          if (product.id === (targetId)) {
+      updatedItemList = [
+        ...cartList,
+        allItens.find((product) => {
+          if (product.id === targetId) {
             product.qtd = 1;
             return product;
           }
           return null;
-        }
-      )];
+        }),
+      ];
     }
     setCartList([...updatedItemList]);
-  }
+  };
 
   const addQtd = (object) => {
     const foundItem = cartList.findIndex((item) => item.id === object.id);
@@ -88,7 +93,7 @@ export const Menu = () => {
       updatedItemList.splice(foundItem, 1);
     }
     setCartList([...updatedItemList]);
-  }
+  };
 
   const deleteItem = (event, index) => {
     event.preventDefault();
@@ -105,59 +110,66 @@ export const Menu = () => {
 
   const [productsResume, setProductsResume] = useState([]);
   useEffect(() => {
-    setProductsResume(cartList.map((item) => {
-      return {
-        id: item.id,
-        qtd: item.qtd,
-      }
-    }))
+    setProductsResume(
+      cartList.map((item) => {
+        return {
+          id: item.id,
+          qtd: item.qtd,
+        };
+      })
+    );
   }, [cartList]);
 
   return (
     <>
-      <SideMenu />
+      {role === "salao" ? (
+        <>
+          <SideMenu />
+          <MenuButtons handleSelected={handleSelected} />
 
-      <main className="big-container">
-        <MenuButtons handleSelected={handleSelected} />
-        <div className="menu-cart-container">
-          <MenuArea>
-            {tab === "Almoço/Jantar" ? (
-              <>
-                <AllDay
-                  onClick={(e) => {
-                    setValue({ ...value, tipo: e.target.value });
-                  }}
-                >
-                  {value.tipo && (
-                    <Complements
-                      value={value}
-                      onClick={addHamburger}
-                      handleFlavor={(e) =>
-                        setValue({ ...value, sabor: e.target.value })
-                      }
-                      handleExtra={(e) =>
-                        setValue({ ...value, adicionais: e.target.value })
-                      }
-                    />
-                  )}
-                </AllDay>
+          <main className="big-container">
+            <MenuArea>
+              {tab === "Almoço/Jantar" ? (
+                <>
+                  <AllDay
+                    onClick={(e) => {
+                      setValue({ ...value, tipo: e.target.value });
+                    }}
+                  >
+                    {value.tipo && (
+                      <Complements
+                        value={value}
+                        onClick={addHamburger}
+                        handleFlavor={(e) =>
+                          setValue({ ...value, sabor: e.target.value })
+                        }
+                        handleExtra={(e) =>
+                          setValue({ ...value, adicionais: e.target.value })
+                        }
+                      />
+                    )}
+                  </AllDay>
 
-                <List content={allDay} onClick={addItem} />
-              </>
-            ) : (
-              <List content={breakfast} onClick={addItem} />
-            )}
-          </MenuArea>
-          <CartArea
-            products={cartList}
-            onClick={deleteItem}
-            addItem={addQtd}
-            reduceItem={reduceQtd}
-            formRef={formRef}
-            handleReset={handleResetForm}
-            orderResume={productsResume} />
-        </div>
-      </main>
+                  <List content={allDay} onClick={addItem} />
+                </>
+              ) : (
+                <List content={breakfast} onClick={addItem} />
+              )}
+            </MenuArea>
+            <CartArea
+              products={cartList}
+              onClick={deleteItem}
+              addItem={addQtd}
+              reduceItem={reduceQtd}
+              formRef={formRef}
+              handleReset={handleResetForm}
+              orderResume={productsResume}
+            />
+          </main>
+        </>
+      ) : (
+        <Unauthorized />
+      )}
     </>
   );
 };

@@ -1,31 +1,11 @@
-import { useEffect, useState } from "react";
-import OrderToDo from "../../components/pages/kitchen/toDo/todo";
 import OrderHistory from "../../components/pages/order_history/order_history";
 import SideMenu from "../../components/side_menu/sidemenu";
-import { filterList, sortData } from "../../data";
-import { getOrders } from "../../services/data";
+import handleOrders from "../../services/handle_orders"
 
 function History() {
-  useEffect(() => {
-    // const interval = setInterval(() => {
-    getDone();
-    // }, 10000);
-    // return () => clearInterval(interval);
-  }, [])
-
-  const [historyOrderList, setHistoryOrderList] = useState([]);
-  function getDone() {
-    getOrders().then((list) => {
-      const historyOrderList = filterList(list, "status", "delivered");
-      const sortHistoryOrderList = sortData(historyOrderList, "createdAt");
-      setHistoryOrderList(sortHistoryOrderList);
-    })
-      .catch((error) => {
-        alert(error);
-      })
-  }
-
-
+  const { 
+    historyOrderList,
+  } = handleOrders();
 
   return (
     <>
