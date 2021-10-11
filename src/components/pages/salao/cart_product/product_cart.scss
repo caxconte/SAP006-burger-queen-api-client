@@ -1,14 +1,9 @@
 .cart-control {
   background-color: var(--color-white);
   border-radius: 10px;
-  // margin: 10px 0 10px 0;
-  // max-width: 300px;
   min-height: 354px;
   width: 100%;
   overflow: auto;
-  // max-height: 200px;
-  // flex: 1 0 auto;
-  // margin-bottom: 10px;
 }
 
 .cart-control-order {
@@ -77,8 +72,5 @@
 
 .finish-order-buttons {
   display: flex;
-
-  .confirm-btn {
-    margin-left: 10px;
-  }
+  justify-content: space-between;
 }

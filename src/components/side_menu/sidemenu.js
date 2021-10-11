@@ -1,6 +1,8 @@
 import { useHistory } from "react-router-dom";
+
 import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
+import handleOrders from "../../services/handle_orders"
 
 import Button from "../UI/button/button";
 import Img from "../UI/image/img";
@@ -9,6 +11,12 @@ import "./sideMenu.scss";
 
 function SideMenu() {
   const buttonHistory = useHistory();
+
+  const { 
+    doneOrderList
+  } = handleOrders();
+
+  let iconStyles = { color: "var(--color-yellow)" };
 
   const newOrder = () => {
     buttonHistory.push("/salao");
@@ -31,7 +39,6 @@ function SideMenu() {
     buttonHistory.push("/");
   };
 
-  let iconStyles = { color: "var(--color-yellow)" };
 
   return (
     <section className="sideMenu-container">
@@ -62,7 +69,7 @@ function SideMenu() {
           icon={<FaClipboardList />}
           children="pedido pronto"
         >
-          {/* <label
+          <label
             className="notificacao-position label-header"
             htmlFor="pedidos-prontos"
           >
@@ -75,7 +82,7 @@ function SideMenu() {
                 {doneOrderList.length}
               </label>
             ) : null}
-          </label> */}
+          </label>
         </Button>
         <Button
           variant="secondary"

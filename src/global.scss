@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap");
 
 * {
   padding: 0;
@@ -22,7 +22,7 @@
   --color-white: #fff;
 }
 
-#root{
+#root {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -62,4 +62,54 @@ form {
 fieldset {
   border: none;
   text-align: center;
+}
+
+.errorpage-container {
+  background-color: var(--color-yellow);
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-shadow: 2px 2px 2px rgba(255, 255, 255, 1);
+
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      margin-right: -40px;
+    }
+
+    h1 {
+      margin-left: -10px;
+      font-size: 4rem;
+    }
+  }
+
+  p {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 70%;
+    margin: 0.6rem 0 0 -40px;
+
+    text-align: center;
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .errorpage-container {
+    h1 {
+      font-size: 5rem;
+    }
+
+    p {
+      font-size: 2rem;
+    }
+  }
 }

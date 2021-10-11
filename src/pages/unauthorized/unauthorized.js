@@ -1,7 +1,7 @@
 import Img from "../../components/UI/image/img";
 import Button from "../../components/UI/button/button";
 
-export const ErrorPage = () => {
+export const Unauthorized = () => {
   function goBack() {
     window.history.back();
   }
@@ -13,14 +13,16 @@ export const ErrorPage = () => {
           className="404"
           width="250px"
           height="250px"
-          src="/img/404.png"
-          alt="Page Not Found"
+          src="/img/notpass.png"
+          alt="Unauthorized Image"
         />
 
-        <h1>404</h1>
+        <h1>403</h1>
       </header>
 
-      <p>Acho que essa página não existe nesse universo... </p>
+      <p>
+        Essa espécie ainda não possui autorização para acessar esse planeta...
+      </p>
 
       <Button
         variant="cancel-btn"
