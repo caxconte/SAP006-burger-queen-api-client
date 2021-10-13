@@ -1,6 +1,7 @@
-import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 
-import { FaClipboardList, FaSignOutAlt } from "react-icons/fa";
+import { FaClipboardList, FaHistory, FaSignOutAlt } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
 import handleOrders from "../../services/handle_orders"
 
@@ -11,30 +12,24 @@ import "./sideMenu.scss";
 
 function SideMenu() {
   const buttonHistory = useHistory();
+  const location = useLocation();
+  const[active, setActive] = useState();
 
-  let iconStyles = { color: "var(--color-yellow)" };
+  useEffect(() => {
+    setActive(location.pathname);
+  }, [location.pathname])
 
-  const newOrder = () => {
-    buttonHistory.push("/salao");
-  };
+  const navigateTo = (e, path) => {
+    e.preventDefault();
+    buttonHistory.push(path);
+  }
 
-  const ordersInProgress = () => {
-    buttonHistory.push("/kitchen");
-  };
-
-  const ordersDone = () => {
-    buttonHistory.push("/done");
-  };
-
-  const ordersHistory = () => {
-    buttonHistory.push("/history");
-  };
+  const iconStyles = { color: "var(--color-yellow)" };
 
   const logout = () => {
     localStorage.clear();
-    buttonHistory.push("/");
+    navigateTo("/");
   };
-
 
   const { 
     doneOrderList
@@ -52,22 +47,20 @@ function SideMenu() {
       <div className="menuButtons-container">
         <Button
           variant="secondary"
-          onClick={(e) => {
-            e.preventDefault();
-            newOrder();
-          }}
+          onClick={(e) => navigateTo(e, "/salao")}
           icon={<AiFillEdit />}
           children="novo pedido"
+          value="/salao"
+          active={active}
         ></Button>
         <Button
           variant="secondary"
-          onClick={(e) => {
-            e.preventDefault();
-            ordersDone();
-          }}
+          onClick={(e) => navigateTo(e, "/done")}
           id="pedidos-prontos"
           icon={<FaClipboardList />}
           children="pedido pronto"
+          value="/done"
+          active={active}
         >
           <label
             className="notificacao-position label-header"
@@ -86,23 +79,21 @@ function SideMenu() {
         </Button>
         <Button
           variant="secondary"
-          onClick={(e) => {
-            e.preventDefault();
-            ordersInProgress();
-          }}
+          onClick={(e) => navigateTo(e, "/kitchen")}
           span="material-icons"
           icon="table_restaurant"
           children="cozinha"
+          value="/kitchen"
+          active={active}
         ></Button>
-         <Button
+        <Button
           variant="secondary"
-          onClick={(e) => {
-            e.preventDefault();
-            ordersHistory();
-          }}
+          onClick={(e) => navigateTo(e, "/history")}
           span="material-icons"
-          icon="table_restaurant"
+          icon={<FaHistory />}
           children="histórico"
+          value="/history"
+          active={active}
         ></Button>
       </div>
 
