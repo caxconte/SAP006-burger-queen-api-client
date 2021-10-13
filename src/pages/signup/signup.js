@@ -1,6 +1,6 @@
 import "./signup.scss";
 import { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Input from "../../components/UI/input/input";
 import Button from "../../components/UI/button/button";
@@ -164,9 +164,9 @@ export const SignUpPage = () => {
 
       <p className="have-account">
         Já possui cadastro? Faça seu {" "}
-        <Link to="/" className="do-login">
+        <a href="/" className="do-login">
           LOGIN
-        </Link>
+        </a>
         .
       </p>
 

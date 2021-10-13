@@ -12,10 +12,6 @@ import "./sideMenu.scss";
 function SideMenu() {
   const buttonHistory = useHistory();
 
-  const { 
-    doneOrderList
-  } = handleOrders();
-
   let iconStyles = { color: "var(--color-yellow)" };
 
   const newOrder = () => {
@@ -39,6 +35,10 @@ function SideMenu() {
     buttonHistory.push("/");
   };
 
+
+  const { 
+    doneOrderList
+  } = handleOrders();
 
   return (
     <section className="sideMenu-container">
