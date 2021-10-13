@@ -15,7 +15,7 @@
 }
 
 .button.primary {
-  @include buttonProps;
+  // @include buttonProps;
 
   background: var(--color-yellow);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -32,7 +32,7 @@
 }
 
 .button.cancel-btn {
-  @include buttonProps;
+  // @include buttonProps;
 
   background: var(--color-red);
   color: var(--color-white);
@@ -51,7 +51,7 @@
 }
 
 .button.start-btn {
-  @include buttonProps;
+  // @include buttonProps;
 
   background: var(--color-red);
   color: var(--color-white);
@@ -105,8 +105,8 @@
   margin-top: 20px;
   font-size: 10px;
   text-transform: uppercase;
-  
-  &:hover, .active {
+
+  &:hover {
     color: var(--color-white);
     background: var(--color-yellow);
   }
@@ -115,6 +115,11 @@
     width: 100%;
     font-size: 1.5rem;
   }
+}
+
+.button.secondary.active {
+  color: var(--color-white);
+  background: var(--color-yellow);
 }
 
 .signout-btn {

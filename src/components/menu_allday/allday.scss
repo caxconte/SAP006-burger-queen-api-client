@@ -1,6 +1,4 @@
 ul {
-  // display: flex;
-  // flex-direction: column;
   width: 100%;
   margin: 5px 0;
 }
@@ -118,6 +116,8 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  height: 113px;
 
   label {
     width: 100px;
@@ -133,9 +133,16 @@ ul {
   button {
     height: 30px;
     width: 90px;
+    margin-top: 0;
   }
 
   svg {
     margin-right: 5px;
   }
+}
+
+.meat-type.active,
+.extras.active {
+  background-color: var(--color-yellow-hover);
+  color: var(--color-black);
 }

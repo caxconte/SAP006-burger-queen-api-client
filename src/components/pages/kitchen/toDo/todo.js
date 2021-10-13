@@ -9,17 +9,9 @@ function OrderToDo({ onClick, list }) {
 
   return list.map((order) => {
     const orderUserId = order.user_id;
-    let variant;
-    if (orderUserId === userId) {
-      variant = "important";
-    } else {
-      variant = "";
-    }
-
-    const classes = `kitchen-article ${variant}`;
 
     return (
-      <article className={classes} key={order.id}>
+      <article className={orderUserId === userId? "kitchen-article important": "kitchen-article"} key={order.id}>
         <TodoHeader order={order} />
 
         <TodoMain order={order} />

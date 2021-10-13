@@ -4,6 +4,7 @@ import TodoMain from "../kitchen/toDo/todo_main";
 export default function OrderHistory({ historyOrderList }) {
   const userId = parseInt(localStorage.getItem("userId"));
 
+
   return historyOrderList.map((order) => {
     const stopWatch = Date.parse(order.updatedAt) - Date.parse(order.createdAt);
     const minutes = 1000 * 60;
@@ -12,17 +13,13 @@ export default function OrderHistory({ historyOrderList }) {
     const totalHours = Math.floor(stopWatch / hours);
 
     const orderUserId = order.user_id;
-    let variant;
-    if (orderUserId === userId) {
-      variant = "important";
-    } else {
-      variant = "";
-    }
-
-    const classes = `kitchen-article ${variant}`;
 
     return (
-      <article className={classes} key={order.id}>
+      <article
+        className={orderUserId === userId ? "kitchen-article important" : "kitchen-article"}
+        key={order.id}
+      >
+
         <TodoHeader order={order} />
 
         <div className="kitchen-header-history">
@@ -32,7 +29,6 @@ export default function OrderHistory({ historyOrderList }) {
           </p>
         </div>
         <TodoMain order={order} />
-
       </article>
     );
   })

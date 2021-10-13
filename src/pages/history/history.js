@@ -1,3 +1,4 @@
+import "./history.scss"
 import OrderHistory from "../../components/pages/order_history/order_history";
 import SideMenu from "../../components/side_menu/sidemenu";
 import handleOrders from "../../services/handle_orders"

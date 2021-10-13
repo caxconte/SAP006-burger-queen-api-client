@@ -8,11 +8,16 @@ import {
 } from "react-icons/gi";
 import "./allday.scss";
 
-function Complements({ handleFlavor, handleExtra, onClick }) {
+function Complements({ handleFlavor, handleExtra, onClick, isActive }) {
+  const extra = isActive.adicionais;
+  const flavor = isActive.sabor;
+  const classMeat = "meat-type";
+  const classExtra = "extras";
+  
   return (
     <>
       <div className="inputs-tipo">
-        <label htmlFor="carne" className="meat-type">
+        <label htmlFor="carne" className={flavor === "carne" ? `${classMeat} active` : classMeat}>
           <GiMeat />
           <input
             type="radio"
@@ -20,12 +25,13 @@ function Complements({ handleFlavor, handleExtra, onClick }) {
             name="sabor"
             value="carne"
             id="carne"
+            active={isActive.flavor}
             required
           />
           Carne
         </label>
 
-        <label htmlFor="frango" className="meat-type">
+        <label htmlFor="frango" className={flavor === "frango" ? `${classMeat} active` : classMeat}>
           <GiChickenLeg />
           <input
             type="radio"
@@ -33,10 +39,11 @@ function Complements({ handleFlavor, handleExtra, onClick }) {
             name="sabor"
             value="frango"
             id="frango"
+            active={isActive.flavor}
           />
           Frango
         </label>
-        <label htmlFor="veggie" className="meat-type">
+        <label htmlFor="veggie" className={flavor === "vegetariano" ? `${classMeat} active` : classMeat}>
           <GiFallingLeaf />
           <input
             type="radio"
@@ -44,12 +51,13 @@ function Complements({ handleFlavor, handleExtra, onClick }) {
             name="sabor"
             value="vegetariano"
             id="veggie"
+            active={isActive.flavor}
           />
           Veggie
         </label>
       </div>
       <div className="inputs-adicional">
-        <label className="extras">
+        <label className={extra === "ovo" ? `${classExtra} active` : classExtra}>
           <GiRawEgg />
           <input
             type="radio"
@@ -59,7 +67,7 @@ function Complements({ handleFlavor, handleExtra, onClick }) {
           />
           ovo
         </label>
-        <label className="extras">
+        <label className={extra === "queijo" ? `${classExtra} active` : classExtra}>
           <GiCheeseWedge />
           <input
             type="radio"
