@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
 import { FaClipboardList, FaHistory, FaSignOutAlt } from "react-icons/fa";
@@ -9,7 +9,6 @@ import Button from "../UI/button/button";
 import Img from "../UI/image/img";
 
 import "./sideMenu.scss";
-import { useState } from "react/cjs/react.development";
 
 function SideMenu() {
   const buttonHistory = useHistory();
@@ -25,16 +24,16 @@ function SideMenu() {
     buttonHistory.push(path);
   }
 
-  const {
-    doneOrderList
-  } = handleOrders();
-
   const iconStyles = { color: "var(--color-yellow)" };
 
   const logout = () => {
     localStorage.clear();
     navigateTo("/");
   };
+
+  const { 
+    doneOrderList
+  } = handleOrders();
 
   return (
     <section className="sideMenu-container">
