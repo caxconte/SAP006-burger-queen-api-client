@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Input from "../../components/UI/input/input";
 import Button from "../../components/UI/button/button";
@@ -140,13 +140,14 @@ function LoginPage() {
           type="submit"
           className="btn btn-primary"
           role="button"
+          testid="login-btn"
         >
           Acessar
         </Button>
       </form>
-      <Link to="/signup" className="cadastre">
+      <a href="/signup" className="cadastre">
         Cadastre-se!
-      </Link>
+      </a>
       <div id="modal">
         <Modal
           open={modal.isOpen}

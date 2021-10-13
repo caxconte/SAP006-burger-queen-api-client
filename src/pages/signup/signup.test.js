@@ -42,7 +42,7 @@ describe("SignUpPage", () => {
     expect(passwordInput.value).toBe(password);
     expect(repeatPasswordInput.value).toBe(password);
     expect(services.signUp).toHaveBeenCalledTimes(1);
-    expect(services.signUp).toHaveBeenCalledWith(email, password, "cozinha");
+    expect(services.signUp).toHaveBeenCalledWith(email, password, "kitchen");
     await waitFor(() => {
       const elem = screen.queryByTestId("modal");
       expect(elem).toBeInTheDocument();
@@ -108,7 +108,7 @@ describe("SignUpPage", () => {
 
     expect(services.signUp).toHaveBeenCalledTimes(1);
     await waitFor(() => {
-      const elem = screen.getByText('Error');
+      const elem = screen.getByText('404');
       expect(elem).toBeInTheDocument();
     });
   })
