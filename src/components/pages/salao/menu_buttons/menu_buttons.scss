@@ -1,8 +1,6 @@
 @import "../../../../global.scss";
 
 .menu-buttons {
-  // margin-top: 40px;
-  // margin-left: auto;
   width: 50%;
   max-width: 350px;
   display: flex;
@@ -11,8 +9,7 @@
   margin-top: 40px;
   position: absolute;
   transform: translate(-50%, -50%);
-    // top: 50%;
-    left: 50%;
+  left: 50%;
 }
 
 .menu-buttons-category {
@@ -25,10 +22,15 @@
   color: var(--color-yellow);
   box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
 
-  text-transform: uppercase; 
+  text-transform: uppercase;
 
   &:hover {
     background-color: var(--color-yellow);
     color: var(--color-white);
   }
+}
+
+.menu-buttons-category.active {
+  background-color: var(--color-yellow);
+  color: var(--color-white);
 }

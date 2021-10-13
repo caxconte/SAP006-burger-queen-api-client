@@ -22,10 +22,12 @@ export const Menu = () => {
   const [breakfast, setBreakfast] = useState([]);
   const [allItens, setAllItens] = useState([]);
   const [tab, setTab] = useState("Café da Manhã");
+  const [isActive, setActive] = useState({ tab: "breakfast" });
 
   function handleSelected(e) {
     const button = e.target.textContent;
-    console.log(button);
+    const buttonValue = e.currentTarget.value;
+    setActive({ ...isActive, tab: buttonValue });
     setTab(button);
   }
 
@@ -39,7 +41,7 @@ export const Menu = () => {
 
   const [value, setValue] = useState({
     tipo: "",
-    sabor: "",
+    sabor: "carne",
     adicionais: null,
   });
 
@@ -52,7 +54,6 @@ export const Menu = () => {
         product.complement === value.adicionais &&
         product.name.includes(value.tipo)
     );
-    // console.log("hamburger= ", foundHamburger);
     addItem(e, foundHamburger.id);
     setValue({ ...value, adicionais: null });
   }
@@ -120,34 +121,54 @@ export const Menu = () => {
     );
   }, [cartList]);
 
+  const handleToggle = (e) => {
+    const buttonValue = e.currentTarget.value;
+
+    function type() {
+      return (value.tipo === buttonValue) ? false : buttonValue;
+    }
+    setValue({ ...value, tipo: type() });
+    setActive({ ...isActive, hamburger: type() });
+  };
+
+  const handleFlavorSelection = (e) => {
+    const flavor = e.target.value;
+    setValue({ ...value, sabor: flavor });
+  }
+
+  const handleExtraSelection = (e) => {
+    const extra = e.target.value;
+    function active() {
+      return value.adicionais === extra ? false : extra;
+    }
+    setValue({ ...value, adicionais: active() });
+  }
+
   return (
     <>
       {role === "salao" ? (
         <>
           <SideMenu />
-          <MenuButtons handleSelected={handleSelected} />
+          <MenuButtons handleSelected={handleSelected} isActive={isActive.tab} />
 
           <main className="big-container">
             <MenuArea>
               {tab === "Almoço/Jantar" ? (
                 <>
                   <AllDay
+                    isActive={value.tipo}
                     onClick={(e) => {
-                      setValue({ ...value, tipo: e.target.value });
+                      handleToggle(e);
                     }}
                   >
-                    {value.tipo && (
+                    {value.tipo ? (
                       <Complements
-                        value={value}
+                        isActive={value}
                         onClick={addHamburger}
-                        handleFlavor={(e) =>
-                          setValue({ ...value, sabor: e.target.value })
-                        }
-                        handleExtra={(e) =>
-                          setValue({ ...value, adicionais: e.target.value })
-                        }
+                        handleFlavor={handleFlavorSelection}
+                        handleExtra={handleExtraSelection}
                       />
-                    )}
+                    ): <p>ASTROBURGER</p>}
                   </AllDay>
 
                   <List content={allDay} onClick={addItem} />

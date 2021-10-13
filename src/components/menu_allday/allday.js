@@ -1,7 +1,7 @@
 import Product from "../pages/salao/product_card/product";
 import "./allday.scss";
 
-function AllDay({ onClick, children }) {
+function AllDay({ onClick, children, isActive }) {
   return (
     <>
       <div className="hamburger-container">
@@ -10,6 +10,7 @@ function AllDay({ onClick, children }) {
           name="tipo"
           value="Hambúrguer simples"
           onClick={onClick}
+          active = {isActive}
         >
           Hambúrguer Simples
         </Product>
@@ -19,6 +20,7 @@ function AllDay({ onClick, children }) {
           name="tipo"
           value="Hambúrguer duplo"
           onClick={onClick}
+          active = {isActive}
         >
           Hambúrguer Duplo
         </Product>

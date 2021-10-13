@@ -18,7 +18,6 @@
     border-radius: 0 0 0.3rem 0.3rem;
     background-color: var(--color-yellow);
     color: var(--color-white);
-    // padding: 0.25rem 0.6rem;
     max-width: 80px;
     position: relative;
     margin-top: -0.5rem;
@@ -26,9 +25,14 @@
     font-size: 0.7rem;
     font-weight: 600;
     box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
+    text-transform: none;
 
     &:hover {
       color: black;
     }
   }
+}
+
+.product.active {
+  color: black;
 }

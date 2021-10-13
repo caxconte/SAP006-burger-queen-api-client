@@ -1,7 +1,7 @@
 import Button from "../../../UI/button/button";
 import "./menu_buttons.scss"
 
-function MenuButtons({ handleSelected }) {
+function MenuButtons({ handleSelected, isActive }) {
 
   return (
     <nav className="menu-buttons">
@@ -12,6 +12,7 @@ function MenuButtons({ handleSelected }) {
           type="button"
           id={"breakfast"}
           className="btn btn-menu-buttons-category"
+          active={isActive}
         >
           Café da Manhã
         </Button>
@@ -23,6 +24,7 @@ function MenuButtons({ handleSelected }) {
           type="button"
           id={"all-day"}
           className="btn btn-menu-buttons-category"
+          active={isActive}
         >
           Almoço/Jantar
         </Button>
