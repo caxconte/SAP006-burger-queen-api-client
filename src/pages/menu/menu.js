@@ -168,7 +168,7 @@ export const Menu = () => {
                         handleFlavor={handleFlavorSelection}
                         handleExtra={handleExtraSelection}
                       />
-                    ): <p>ASTROBURGER</p>}
+                    ): <p>astroburger</p>}
                   </AllDay>
 
                   <List content={allDay} onClick={addItem} />
