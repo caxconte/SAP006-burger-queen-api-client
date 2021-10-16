@@ -1,7 +1,5 @@
 import LoginPage from "./login";
-import { Routes } from "../../Routes";
-import { MemoryRouter, Route } from "react-router-dom";
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as services from "../../services/index.js";
 
@@ -13,7 +11,7 @@ describe("LoginPage", () => {
   });
 
   it("should render success modal", async () => {
-    const response = { userToken: "testtoken" };
+    const response = { userToken: "tes ttoken" };
     services.loginWithEmailAndPassword.mockResolvedValueOnce(response);
 
     // Render page
