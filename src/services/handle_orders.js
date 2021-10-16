@@ -9,7 +9,7 @@ function handleOrders() {
   useEffect(() => {
     const interval = setInterval(() => {
       getAllOrders();
-    }, 5000);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 

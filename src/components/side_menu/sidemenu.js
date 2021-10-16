@@ -27,9 +27,9 @@ function SideMenu() {
 
   const iconStyles = { color: "var(--color-yellow)" };
 
-  const logout = () => {
+  const logout = (e) => {
     localStorage.clear();
-    navigateTo("/");
+    navigateTo(e, "/");
   };
 
   const {
