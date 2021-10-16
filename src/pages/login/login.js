@@ -82,13 +82,12 @@ function LoginPage() {
         .then((user) => {
           const token = user.token;
           const role = user.role;
-          localStorage.setItem("userToken", token);
-          localStorage.setItem("userRole", role);
-          localStorage.setItem("userId", user.id);
-
+          
           if (token !== undefined) {
-            console.log(token)
-            modalProps()
+            localStorage.setItem("userToken", token);
+            localStorage.setItem("userRole", role);
+            localStorage.setItem("userId", user.id);
+            modalProps();
             navigateTo(`/${role}`);
           } else {
             const code = user.code;

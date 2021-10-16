@@ -3,7 +3,8 @@ import { useHistory, useLocation } from "react-router-dom";
 
 import { FaClipboardList, FaHistory, FaSignOutAlt } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
-import handleOrders from "../../services/handle_orders"
+import { GiChefToque } from "react-icons/gi";
+import handleOrders from "../../services/handle_orders";
 
 import Button from "../UI/button/button";
 import Img from "../UI/image/img";
@@ -13,7 +14,7 @@ import "./sideMenu.scss";
 function SideMenu() {
   const buttonHistory = useHistory();
   const location = useLocation();
-  const[active, setActive] = useState();
+  const [active, setActive] = useState();
 
   useEffect(() => {
     setActive(location.pathname);
@@ -31,7 +32,7 @@ function SideMenu() {
     navigateTo(e, "/");
   };
 
-  const { 
+  const {
     doneOrderList
   } = handleOrders();
 
@@ -81,7 +82,7 @@ function SideMenu() {
           variant="secondary"
           onClick={(e) => navigateTo(e, "/kitchen")}
           span="material-icons"
-          icon="table_restaurant"
+          icon={<GiChefToque />}
           children="cozinha"
           value="/kitchen"
           active={active}
